@@ -405,7 +405,6 @@ name = "cffi"
 version = "1.16.0"
 description = "Foreign Function Interface for Python calling C code."
 optional = true
-optional = true
 python-versions = ">=3.8"
 files = [
     {file = "cffi-1.16.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:6b3d6606d369fc1da4fd8c357d026317fbb9c9b75d36dc16e90e84c26854b088"},
@@ -686,7 +685,6 @@ toml = ["tomli"]
 name = "cryptography"
 version = "42.0.8"
 description = "cryptography is a package which provides cryptographic recipes and primitives to Python developers."
-optional = true
 optional = true
 python-versions = ">=3.7"
 files = [
