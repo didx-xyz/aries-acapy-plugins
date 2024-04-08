@@ -22,13 +22,13 @@ jobs:
       #       Get docker compose
       #----------------------------------------------
       - name: Initialize Docker Compose
-        uses: isbang/compose-action@v1.5.1
+        uses: isbang/compose-action@v2.0.0
       #----------------------------------------------
       #       Get changed files
       #----------------------------------------------
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@v42
+        uses: tj-actions/changed-files@v44
       #----------------------------------------------
       #       Get changed plugins
       #----------------------------------------------
