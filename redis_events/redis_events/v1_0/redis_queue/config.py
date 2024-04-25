@@ -2,8 +2,7 @@
 
 import logging
 from typing import Any, Mapping, Optional
-
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 
 LOGGER = logging.getLogger(__name__)
 
@@ -43,8 +42,7 @@ def _alias_generator(key: str) -> str:
 
 class NoneDefaultModel(BaseModel):
     """Pydantic model that allows None as a default value."""
-
-    @validator("*", pre=True)
+    @field_validator("*", mode="before")
     def not_none(cls, v, field):
         """If the value is None, return the default value."""
         if all(
