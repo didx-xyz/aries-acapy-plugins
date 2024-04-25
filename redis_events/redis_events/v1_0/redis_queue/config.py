@@ -42,7 +42,6 @@ def _alias_generator(key: str) -> str:
 
 class NoneDefaultModel(BaseModel):
     """Pydantic model that allows None as a default value."""
-
     @field_validator("*", mode="before")
     def not_none(cls, v, field):
         """If the value is None, return the default value."""
