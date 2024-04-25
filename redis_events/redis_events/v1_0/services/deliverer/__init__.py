@@ -7,6 +7,7 @@ from pydantic import BaseModel, PrivateAttr, field_validator
 
 class NoneDefaultModel(BaseModel):
     """Pydantic model that allows None as a default value."""
+
     @field_validator("*", mode="before")
     def not_none(cls, v, field):
         """If the value is None, return the default value."""
