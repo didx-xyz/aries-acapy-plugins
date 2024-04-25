@@ -67,7 +67,7 @@ class ConnectionConfig(BaseModel):
         """Pydantic config."""
 
         alias_generator = _alias_generator
-        allow_population_by_field_name = True
+        populate_by_name = True
 
     @classmethod
     def default(cls):
@@ -86,7 +86,7 @@ class EventConfig(NoneDefaultModel):
         """Pydantic config."""
 
         alias_generator = _alias_generator
-        allow_population_by_field_name = True
+        populate_by_name = True
 
     @classmethod
     def default(cls):
@@ -108,7 +108,7 @@ class InboundConfig(NoneDefaultModel):
         """Pydantic config."""
 
         alias_generator = _alias_generator
-        allow_population_by_field_name = True
+        populate_by_name = True
 
     @classmethod
     def default(cls):
@@ -137,9 +137,9 @@ class OutboundConfig(NoneDefaultModel):
 class RedisConfig(BaseModel):
     """Redis configuration model."""
 
-    event: Optional[EventConfig]
-    inbound: Optional[InboundConfig]
-    outbound: Optional[OutboundConfig]
+    event: Optional[EventConfig] = None
+    inbound: Optional[InboundConfig] = None
+    outbound: Optional[OutboundConfig] = None
     connection: ConnectionConfig
 
     @classmethod
@@ -174,6 +174,8 @@ def get_config(settings: Mapping[str, Any]) -> RedisConfig:
         LOGGER.warning("Using default configuration")
         config = RedisConfig.default()
 
-    LOGGER.debug("Returning config: %s", config.json(indent=2))
-    LOGGER.debug("Returning config(aliases): %s", config.json(by_alias=True, indent=2))
+    LOGGER.debug("Returning config: %s", config.model_dump_json(indent=2))
+    LOGGER.debug(
+        "Returning config(aliases): %s", config.model_dump_json(by_alias=True, indent=2)
+    )
     return config
