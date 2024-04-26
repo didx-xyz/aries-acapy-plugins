@@ -264,7 +264,7 @@ indy = ["python3-indy (>=1.11.1,<2.0.0)"]
 type = "git"
 url = "https://github.com/ff137/aries-cloudagent-python.git"
 reference = "test-pydid-upgrade"
-resolved_reference = "2db46956e6806ea04107c5d1d711dc34a4767e7c"
+resolved_reference = "62b3b29d3daf2c27f518d60b23b03967b07eac4b"
 
 [[package]]
 name = "async-timeout"
@@ -2036,7 +2036,7 @@ typing-extensions = "^4.7.0"
 type = "git"
 url = "https://github.com/ff137/pydid.git"
 reference = "upgrade/pydantic"
-resolved_reference = "1ec56b2a0b454c69216c0f949ab017c1795ac995"
+resolved_reference = "ebc5c4f29950d9aa869aedb777bb82810de3fc36"
 
 [[package]]
 name = "pyjwt"
