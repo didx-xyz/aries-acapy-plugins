@@ -2568,4 +2568,4 @@ aca-py = ["aries-cloudagent"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "e3443850da8e05e014c24635296e00099b1b7ff12e2dc1ab04bd473d0d4b1fcb"
+content-hash = "df83caa9ef5f3c29834ced38d43295eeb001eea1018c55fe06d4c70b11f97909"
