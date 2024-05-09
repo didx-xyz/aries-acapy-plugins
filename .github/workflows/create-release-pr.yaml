@@ -192,10 +192,10 @@ jobs:
           done
           echo unit_test_plugins=${failed_plugins[*]} >> $GITHUB_OUTPUT
       # ----------------------------------------------
-      #       Install docker compose
+      #       Install Docker
       # ----------------------------------------------
-      - name: Initialize Docker Compose
-        uses: isbang/compose-action@v1.5.1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
       # ----------------------------------------------
       #       Collect plugins that fail integration tests
       # ----------------------------------------------
