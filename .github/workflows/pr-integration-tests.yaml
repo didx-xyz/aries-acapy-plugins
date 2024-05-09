@@ -22,8 +22,8 @@ jobs:
       #----------------------------------------------
       #       Get docker compose
       #----------------------------------------------
-      - name: Initialize Docker Compose
-        uses: isbang/compose-action@v1.5.1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
       #----------------------------------------------
       #       Get changed files
       #----------------------------------------------
