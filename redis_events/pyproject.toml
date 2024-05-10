@@ -11,7 +11,7 @@ python = "^3.9"
 # explicitly installed with the plugin if desired.
 aries-cloudagent = { version = "0.12.1", optional = true }
 aiohttp = "^3.9.5"
-fastapi = "^0.111.0"
+fastapi-slim = "^0.111.0"
 nest-asyncio = "^1.5.5"
 pydantic = "^1.10.15"
 redis = "^5.0.4"
@@ -21,7 +21,7 @@ uvicorn = "^0.29.0"
 aca-py = ["aries-cloudagent"]
 
 [tool.poetry.dev-dependencies]
-ruff= "^0.4.4"
+ruff = "^0.4.4"
 black = "~24.4.2"
 pytest = "^8.2.0"
 pytest-asyncio = "^0.23.6"
