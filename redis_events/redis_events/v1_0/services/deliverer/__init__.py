@@ -2,13 +2,13 @@ import base64
 import json
 from urllib.parse import urlparse
 
-from pydantic import BaseModel, PrivateAttr, validator
+from pydantic import BaseModel, PrivateAttr, field_validator
 
 
 class NoneDefaultModel(BaseModel):
     """Pydantic model that allows None as a default value."""
 
-    @validator("*", pre=True)
+    @field_validator("*", mode="before")
     def not_none(cls, v, field):
         """If the value is None, return the default value."""
         if all(
@@ -39,7 +39,7 @@ class RedisQueuePayload(NoneDefaultModel):
 
     def to_bytes(self) -> bytes:
         """Serialize a Pydantic model into a bytes object."""
-        return str.encode(self.json(), encoding="utf8")
+        return str.encode(self.model_dump_json(), encoding="utf8")
 
 
 class Service(BaseModel):
@@ -62,7 +62,7 @@ class OutboundPayload(RedisQueuePayload):
         super().__init__(**data)
         self._endpoint_scheme = urlparse(self.service.url).scheme
 
-    @validator("payload", pre=True)
+    @field_validator("payload", mode="before")
     @classmethod
     def decode_payload_to_bytes(cls, v):
         """Decode payload model to bytes.""" ""
