@@ -274,8 +274,8 @@ bbs = ["ursa-bbs-signatures (>=1.0.1,<1.1.0)"]
 [package.source]
 type = "git"
 url = "https://github.com/ff137/aries-cloudagent-python.git"
-reference = "test-fix-get-wallet-profile"
-resolved_reference = "e8e71001bac44f685916eb23fcf9138001719dad"
+reference = "test-fix-get-wallet-profile2"
+resolved_reference = "338072f2fc0887d50c71749a2a754dd5e93333d4"
 
 [[package]]
 name = "async-timeout"
@@ -2345,13 +2345,13 @@ test = ["mock", "pytest", "pytest-cov"]
 
 [[package]]
 name = "redis"
-version = "5.0.5"
+version = "5.0.6"
 description = "Python client for Redis database and key-value store"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "redis-5.0.5-py3-none-any.whl", hash = "sha256:30b47d4ebb6b7a0b9b40c1275a19b87bb6f46b3bed82a89012cf56dea4024ada"},
-    {file = "redis-5.0.5.tar.gz", hash = "sha256:3417688621acf6ee368dec4a04dd95881be24efd34c79f00d31f62bb528800ae"},
+    {file = "redis-5.0.6-py3-none-any.whl", hash = "sha256:c0d6d990850c627bbf7be01c5c4cbaadf67b48593e913bb71c9819c30df37eee"},
+    {file = "redis-5.0.6.tar.gz", hash = "sha256:38473cd7c6389ad3e44a91f4c3eaf6bcb8a9f746007f29bf4fb20824ff0b2197"},
 ]
 
 [package.dependencies]
@@ -2863,4 +2863,4 @@ aca-py = ["aries-cloudagent"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "55a02729b85161547e8983c0c09b33c1e39fa7a225d0a24d5a9fe80d35e37bfd"
+content-hash = "22b434a25dc9c7385cadf76dc0aceb4d1f44439d60ecdaaa7bd4f1262ac3fd6e"
