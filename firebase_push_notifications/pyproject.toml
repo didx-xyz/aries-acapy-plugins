@@ -5,11 +5,11 @@ description = " (Supported aries-cloudagent version: 0.12.1) "
 authors = []
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.12"
 
 # Define ACA-Py as an optional/extra dependancy so it can be
 # explicitly installed with the plugin if desired.
-aries-cloudagent = { version = ">=0.10.3, < 1.0.0", optional = true }
+aries-cloudagent = { git = "https://github.com/didx-xyz/aries-cloudagent-python.git", tag = "0.12.2b2" }
 marshmallow = "^3.20.1"
 google-auth = "^2.25.2"
 google-api-python-client = "^2.111.0"
