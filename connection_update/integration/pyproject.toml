@@ -7,7 +7,7 @@ authors = []
 [tool.poetry.dependencies]
 python = "^3.12"
 pytest = "^8.2.0"
-pytest-asyncio = "^0.23.6"
+pytest-asyncio = "~0.23.7"
 requests = "^2.31.0"
 aries-cloudagent = { git = "https://github.com/didx-xyz/aries-cloudagent-python.git", tag = "0.12.2b2" }
 
