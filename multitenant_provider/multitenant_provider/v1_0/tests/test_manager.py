@@ -25,10 +25,7 @@ from ..models import WalletTokenRecord
 
 class MockInjectMultitenantProviderConfig:
     def __init__(self, always_check_key: Optional[bool] = False) -> None:
-        self.inject = lambda _: MultitenantProviderConfig(
-            manager=ManagerConfig(always_check_provided_wallet_key=always_check_key),
-            token_expiry=TokenExpiryConfig(),
-        )
+        self.inject = lambda _: MultitenantProviderConfig.default()
 
     def inject(_):
         return MultitenantProviderConfig(

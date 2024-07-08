@@ -40,15 +40,17 @@ class MockWalletRecordRequiresExternalKey:
 class TestRoutes(IsolatedAsyncioTestCase):
     async def asyncSetUp(self) -> None:
         self.session_inject = {}
-        self.profile = InMemoryProfile.test_profile()
+        self.profile = InMemoryProfile.test_profile(
+            settings={
+                "admin.admin_api_key": "admin_api_key",
+                "admin.admin_insecure_mode": False,
+            }
+        )
         mock_session = MagicMock()
         mock_session.__aenter__ = AsyncMock(return_value=mock_session)
         self.profile.session = mock_session
         self.context = AdminRequestContext.test_context(
-            session_inject=self.session_inject,
-            profile=InMemoryProfile.test_profile(
-                settings={"admin.admin_insecure_mode": True}
-            ),
+            self.session_inject, self.profile
         )
         self.request_dict = {
             "context": self.context,
@@ -59,6 +61,7 @@ class TestRoutes(IsolatedAsyncioTestCase):
             query={},
             __getitem__=lambda _, k: self.request_dict[k],
             context=self.context,
+            headers={"x-api-key": "admin_api_key"},
         )
 
     @patch.object(WalletRecord, "retrieve_by_id")
