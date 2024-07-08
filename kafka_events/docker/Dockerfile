@@ -1,4 +1,4 @@
-FROM ghcr.io/hyperledger/aries-cloudagent-python:py3.9-indy-1.16.0-0.8.0-rc0
+FROM ghcr.io/hyperledger/aries-cloudagent-python:py3.12-nightly-2024-07-08
 
 RUN pip3 install --no-cache-dir poetry
 
