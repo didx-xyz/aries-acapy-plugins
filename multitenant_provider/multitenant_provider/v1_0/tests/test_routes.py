@@ -45,7 +45,10 @@ class TestRoutes(IsolatedAsyncioTestCase):
         mock_session.__aenter__ = AsyncMock(return_value=mock_session)
         self.profile.session = mock_session
         self.context = AdminRequestContext.test_context(
-            self.session_inject, profile=self.profile
+            session_inject=self.session_inject,
+            profile=InMemoryProfile.test_profile(
+                settings={"admin.admin_insecure_mode": True}
+            ),
         )
         self.request_dict = {
             "context": self.context,
@@ -68,7 +71,7 @@ class TestRoutes(IsolatedAsyncioTestCase):
         mock_manager.create_auth_token.return_value = "token"
         self.context.profile.inject = Mock(
             side_effect=[
-                MultitenantProviderConfig().default(),
+                MultitenantProviderConfig.default(),
                 mock_manager,
             ]
         )

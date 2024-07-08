@@ -11,6 +11,7 @@ from aiohttp_apispec import (
     querystring_schema,
     response_schema,
 )
+from aries_cloudagent.admin.decorators.auth import tenant_authentication
 from aries_cloudagent.admin.request_context import AdminRequestContext
 from aries_cloudagent.connections.models.conn_record import ConnRecord
 from aries_cloudagent.messaging.models.base import (
@@ -55,7 +56,7 @@ class DRPCRequest(BaseModel):
         """Initialize DIDComm RPC Request Model."""
 
         super().__init__(**kwargs)
-        self.request = request
+        self.request = request or {}
 
 
 class DRPCResponse(BaseModel):
@@ -70,7 +71,7 @@ class DRPCResponse(BaseModel):
         """Initialize DIDComm RPC Response Model."""
 
         super().__init__(**kwargs)
-        self.response = response
+        self.response = response or {}
         self.thread_id = thread_id
 
 
@@ -170,6 +171,7 @@ class DRPCRecordMatchInfoSchema(OpenAPISchema):
 @match_info_schema(DRPCConnIdMatchInfoSchema())
 @json_schema(DRPCRequestJSONSchema())
 @response_schema(DRPCRequestMessageSchema(), 200)
+@tenant_authentication
 async def drpc_send_request(request: web.BaseRequest):
     """Request handler for sending a DIDComm RPC request message."""
 
@@ -234,6 +236,7 @@ async def drpc_send_request(request: web.BaseRequest):
 @match_info_schema(DRPCConnIdMatchInfoSchema())
 @json_schema(DRPCResponseJSONSchema())
 @response_schema(DRPCResponseMessageSchema(), 200)
+@tenant_authentication
 async def drpc_send_response(request: web.BaseRequest):
     """Request handler for sending a DIDComm RPC response message."""
 
@@ -293,6 +296,7 @@ async def drpc_send_response(request: web.BaseRequest):
 )
 @querystring_schema(DRPCRecordListQuerySchema())
 @response_schema(DRPCRecordListSchema(), 200)
+@tenant_authentication
 async def drpc_get_records(request: web.BaseRequest):
     """Request handler for getting all DIDComm RPC records."""
 
@@ -345,6 +349,7 @@ async def drpc_get_records(request: web.BaseRequest):
 )
 @match_info_schema(DRPCRecordMatchInfoSchema())
 @response_schema(DRPCRecordSchema(), 200)
+@tenant_authentication
 async def drpc_get_record(request: web.BaseRequest):
     """Request handler for getting a DIDComm RPC record."""
 

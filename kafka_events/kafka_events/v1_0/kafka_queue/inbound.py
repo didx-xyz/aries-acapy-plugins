@@ -34,7 +34,7 @@ class KafkaInboundTransport(BaseInboundTransport):
         self.consumer = AIOKafkaConsumer(
             *self.config.topics,
             bootstrap_servers=self.host,
-            **self.config.consumer.dict(),
+            **self.config.consumer.model_dump(),
             ssl_context=(
                 ssl.create_default_context()
                 if self.config.consumer.ssl_required

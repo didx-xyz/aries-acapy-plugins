@@ -2,6 +2,7 @@
 
 import logging
 from typing import Any, Mapping, Optional
+
 from pydantic import BaseModel, field_validator
 
 LOGGER = logging.getLogger(__name__)
@@ -40,24 +41,6 @@ def _alias_generator(key: str) -> str:
     return key.replace("_", "-")
 
 
-class NoneDefaultModel(BaseModel):
-    """Pydantic model that allows None as a default value."""
-
-    @field_validator("*", mode="before")
-    def not_none(cls, v, field):
-        """If the value is None, return the default value."""
-        if all(
-            (
-                # Cater for the occasion where field.default in (0, False)
-                getattr(field, "default", None) is not None,
-                v is None,
-            )
-        ):
-            return field.default
-        else:
-            return v
-
-
 class ConnectionConfig(BaseModel):
     """Connection configuration model."""
 
@@ -75,7 +58,7 @@ class ConnectionConfig(BaseModel):
         return cls(connection_url="redis://default:test1234@172.28.0.103:6379")
 
 
-class EventConfig(NoneDefaultModel):
+class EventConfig(BaseModel):
     """Event configuration model."""
 
     event_topic_maps: Mapping[str, str] = EVENT_TOPIC_MAP
@@ -98,7 +81,7 @@ class EventConfig(NoneDefaultModel):
         )
 
 
-class InboundConfig(NoneDefaultModel):
+class InboundConfig(BaseModel):
     """Inbound configuration model."""
 
     acapy_inbound_topic: str = "acapy_inbound"
@@ -119,7 +102,7 @@ class InboundConfig(NoneDefaultModel):
         )
 
 
-class OutboundConfig(NoneDefaultModel):
+class OutboundConfig(BaseModel):
     """Outbound configuration model."""
 
     acapy_outbound_topic: str = "acapy_outbound"
@@ -137,9 +120,9 @@ class OutboundConfig(NoneDefaultModel):
 class RedisConfig(BaseModel):
     """Redis configuration model."""
 
-    event: Optional[EventConfig] = None
-    inbound: Optional[InboundConfig] = None
-    outbound: Optional[OutboundConfig] = None
+    event: Optional[EventConfig] = EventConfig.default()
+    inbound: Optional[InboundConfig] = InboundConfig.default()
+    outbound: Optional[OutboundConfig] = OutboundConfig.default()
     connection: ConnectionConfig
 
     @classmethod

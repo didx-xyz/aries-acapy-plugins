@@ -15,7 +15,11 @@ from multitenant_provider.v1_0.config import (
 )
 
 from ..config import ManagerConfig
-from ..manager import MulittokenHandler, WalletKeyMismatchError
+from ..manager import (
+    BasicMultitokenMultitenantManager,
+    MulittokenHandler,
+    WalletKeyMismatchError,
+)
 from ..models import WalletTokenRecord
 
 
@@ -50,7 +54,7 @@ class MockWalletRecordRequiresKey:
 class TestMulittokenHandler(IsolatedAsyncioTestCase):
     async def asyncSetUp(self) -> None:
         self.session_inject = {}
-        self.manager = MagicMock()
+        self.manager = BasicMultitokenMultitenantManager(InMemoryProfile.test_profile())
         self.get_profile = lambda: InMemoryProfile.test_profile()
         self.context = MagicMock()
 
@@ -203,6 +207,15 @@ class TestMulittokenHandler(IsolatedAsyncioTestCase):
         "find_or_create_wallet_token_record",
         return_value=WalletTokenRecord(
             wallet_id="wallet-id",
+            wallet_key_salt=MagicMock(
+                encode=MagicMock(
+                    return_value=bytes(
+                        "$2a$04$LTpKKGs3P/oR7/7LMqxySukW3IYKZqSarX.b/cXzcSdduIV4rYoDC",
+                        "utf-8",
+                    )
+                )
+            ),
+            wallet_key_hash=MagicMock(encode=MagicMock(return_value="test-password")),
         ),
     )
     @patch.object(
@@ -220,7 +233,12 @@ class TestMulittokenHandler(IsolatedAsyncioTestCase):
         "save",
         return_value=WalletTokenRecord(wallet_id="wallet-id-test"),
     )
-    async def test_create_auth_token(self, mock_save_record, mock_save, _1, _2):
+    @patch.object(
+        bcrypt,
+        "checkpw",
+        return_value=True,
+    )
+    async def test_create_auth_token(self, mock_save_record, mock_save, *_):
         wallet_record = WalletRecord(
             jwt_iat="test-jwt-iat",
             wallet_id="wallet-id",

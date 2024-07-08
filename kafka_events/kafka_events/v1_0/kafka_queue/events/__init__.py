@@ -45,7 +45,7 @@ async def on_startup(profile: Profile, event: Event):
     config = get_config(profile.settings).events or EventsConfig.default()
 
     producer = AIOKafkaProducer(
-        **config.producer.dict(),
+        **config.producer.model_dump(),
         ssl_context=(
             ssl.create_default_context() if config.producer.ssl_required else None
         ),

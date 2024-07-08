@@ -21,7 +21,7 @@ class KafkaQueuePayload(BaseModel):
 
     def to_bytes(self) -> bytes:
         """Convert the payload to a bytes object."""
-        return str.encode(self.json(), encoding="utf8")
+        return str.encode(self.model_dump_json(), encoding="utf8")
 
 
 class Service(BaseModel):

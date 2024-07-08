@@ -74,7 +74,7 @@ class KafkaOutboundQueue(BaseOutboundTransport):
         LOGGER.info("Starting kafka outbound queue producer")
 
         self.producer = AIOKafkaProducer(
-            **self.config.producer.dict(),
+            **self.config.producer.model_dump(),
             ssl_context=(
                 ssl.create_default_context()
                 if self.config.producer.ssl_required

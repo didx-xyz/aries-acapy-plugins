@@ -208,9 +208,7 @@ def process_main_config_sections(
                         i,
                         content,
                         output,
-                        global_sections[
-                            ManagedPoetrySections(content[i].strip()).name
-                        ],
+                        global_sections[ManagedPoetrySections(content[i].strip()).name],
                         content[i],
                     )
             else:
@@ -266,9 +264,7 @@ def process_integration_config_sections(
                         i,
                         content,
                         output,
-                        global_sections[
-                            ManagedPoetrySections(content[i].strip()).name
-                        ],
+                        global_sections[ManagedPoetrySections(content[i].strip()).name],
                         content[i],
                     )
             else:
@@ -302,10 +298,11 @@ def update_all_poetry_locks():
             print(f"Updating poetry.lock in {root}")
             subprocess.run(["poetry", "lock"], cwd=root)
 
+
 def upgrade_library_in_all_plugins(library: str = None):
     if library is None:
         library = input("Enter the library to upgrade: ")
-        
+
     for root, _, files in os.walk("."):
         if "poetry.lock" in files:
             with open(f"{root}/poetry.lock", "r") as file:
