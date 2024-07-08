@@ -3,7 +3,7 @@
 import logging
 from typing import Any, Mapping, Optional
 
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel
 
 LOGGER = logging.getLogger(__name__)
 
