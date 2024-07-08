@@ -13,14 +13,14 @@ RUN mkdir kafka_queue && touch kafka_queue/__init__.py
 
 COPY ./README.md ./setup.py ./pyproject.toml ./poetry.lock ./
 USER root
-RUN chown indy:indy -R .
-USER indy
+RUN chown aries:aries -R .
+USER aries
 
 ARG install_flags='--with integration --extras aca-py'
 RUN poetry install ${install_flags}
 
 # Make site packages location more accessible (for use with volumes)
-RUN ln -s $(poetry env info -p)/lib/python3.6/site-packages site-packages
+RUN ln -s $(poetry env info -p)/lib/python3.12/site-packages site-packages
 
 COPY kafka_events/v1_0/kafka_queue kafka_queue
 COPY ./docker/default.yml .
