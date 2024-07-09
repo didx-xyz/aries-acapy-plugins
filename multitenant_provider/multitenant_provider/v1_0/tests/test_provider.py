@@ -14,9 +14,7 @@ class TestProvider(IsolatedAsyncioTestCase):
     async def asyncSetUp(self) -> None:
         self.profile = InMemoryProfile.test_profile()
         self.profile.inject = Mock()
-        self.profile.inject.return_value = MultitenantProviderConfig(
-            manager={"class_name": "test-class-name"}
-        )
+        self.profile.inject.return_value = MultitenantProviderConfig.default()
 
     @patch.object(ClassLoader, "load_class")
     async def test_provide_loads_manager(self, mock_class_loader):

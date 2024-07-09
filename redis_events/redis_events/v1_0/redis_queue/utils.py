@@ -161,7 +161,7 @@ async def reassign_recip_key_to_uid(
 async def process_payload_recip_key(
     redis: RedisCluster, payload: Union[str, bytes], topic: str
 ):
-    """Process payload and recip_key and return topic and message.""" ""
+    """Process payload and recip_key and return topic and message."""
     recip_key_in = ",".join(_recipients_from_packed_message(payload))
     recip_key_in_encoded = recip_key_in.encode()
     message = str.encode(

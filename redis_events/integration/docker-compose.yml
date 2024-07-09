@@ -165,7 +165,7 @@ services:
       - "faber:host-gateway"
 
   dummy-server:
-    image: python:3.9-slim
+    image: python:3.12-slim
     ports:
       - 8080:8080
     command: python -m http.server 8080

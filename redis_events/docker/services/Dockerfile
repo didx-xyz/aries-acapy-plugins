@@ -1,10 +1,10 @@
-FROM python:3.9-slim AS base
+FROM python:3.12-slim AS base
 WORKDIR /usr/src/app
 
 # Install and configure poetry
 USER root
 
-ENV POETRY_VERSION=1.7.1
+ENV POETRY_VERSION=1.8.3
 ENV POETRY_HOME=/opt/poetry
 RUN apt-get update && apt-get install -y curl && apt-get clean
 RUN curl -sSL https://install.python-poetry.org | python -
@@ -16,7 +16,7 @@ COPY ./docker/services/pyproject.toml ./docker/services/poetry.lock ./
 RUN poetry install
 USER $user
 
-FROM python:3.9-bullseye
+FROM python:3.12-bullseye
 WORKDIR /usr/src/app
 COPY --from=base /usr/src/app/.venv /usr/src/app/.venv
 ENV PATH="/usr/src/app/.venv/bin:$PATH"

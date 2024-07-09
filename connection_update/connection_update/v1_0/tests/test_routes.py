@@ -3,6 +3,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 from aries_cloudagent.admin.request_context import AdminRequestContext
 from aries_cloudagent.connections.models.conn_record import ConnRecord
+from aries_cloudagent.core.in_memory.profile import InMemoryProfile
 
 from .. import routes as test_module
 
@@ -10,7 +11,12 @@ from .. import routes as test_module
 class TestRoutes(IsolatedAsyncioTestCase):
     async def asyncSetUp(self) -> None:
         self.session_inject = {}
-        self.context = AdminRequestContext.test_context(self.session_inject)
+        self.context = AdminRequestContext.test_context(
+            session_inject=self.session_inject,
+            profile=InMemoryProfile.test_profile(
+                settings={"admin.admin_insecure_mode": True}
+            ),
+        )
         self.request_dict = {
             "context": self.context,
             "outbound_message_router": AsyncMock(),

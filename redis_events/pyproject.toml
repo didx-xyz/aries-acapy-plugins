@@ -5,11 +5,11 @@ description = "ACA-PY persisted events using Redis (Supported aries-cloudagent v
 authors = ["Shaanjot Gill <gill.shaanjots@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.12"
 
 # Define ACA-Py as an optional/extra dependancy so it can be
 # explicitly installed with the plugin if desired.
-aries-cloudagent = { git = "https://github.com/didx-xyz/aries-cloudagent-python.git", tag = "0.12.2b1" }
+aries-cloudagent = { git = "https://github.com/didx-xyz/aries-cloudagent-python.git", tag = "0.12.2b2" }
 aiohttp = "^3.9.5"
 fastapi-slim = "^0.111.0"
 nest-asyncio = "^1.5.5"
@@ -64,7 +64,7 @@ ignore = [
     "C901",
 ]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "**/{tests}/*" = ["F841", "D", "E501"]
 
 [tool.pytest.ini_options]
