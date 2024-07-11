@@ -2,7 +2,7 @@
 
 [[package]]
 name = "acapy-controller"
-version = "0.1.1"
+version = "0.2.0"
 description = "ACA-Py Controller"
 optional = false
 python-versions = "^3.10"
@@ -15,13 +15,13 @@ async-selective-queue = "^0.1.1"
 blessings = "^1.7"
 
 [package.extras]
-models = ["pydantic (>=1.10.2,<2.0.0)"]
+models = ["pydantic (>=2.8.2,<3.0.0)"]
 
 [package.source]
 type = "git"
 url = "https://github.com/indicio-tech/acapy-minimal-example.git"
 reference = "HEAD"
-resolved_reference = "eb717e5595bfd4e44779cc20d27b575dea52b1e7"
+resolved_reference = "53f5b5ebaa9bf716d3bb13c9342db584c76cd7c6"
 
 [[package]]
 name = "aiohttp"
@@ -972,4 +972,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "8c6419537d59fde5a9d43e52517c54bb15d1d9b917db779707ae83d3598d5e37"
+content-hash = "2ed2015ae36a5f636cd67b56c632158361cc2d1367c7fd6f636436f059e7e6eb"
