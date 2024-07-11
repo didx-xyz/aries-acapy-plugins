@@ -9,13 +9,13 @@ python = "^3.12"
 
 # Define ACA-Py as an optional/extra dependancy so it can be
 # explicitly installed with the plugin if desired.
-aries-cloudagent = { git = "https://github.com/didx-xyz/aries-cloudagent-python.git", tag = "0.12.2b2" }
+aries-cloudagent = "1.0.0rc4"
 
 [tool.poetry.extras]
 aca-py = ["aries-cloudagent"]
 
 [tool.poetry.dev-dependencies]
-ruff = "^0.5.0"
+ruff = "^0.5.1"
 black = "~24.4.2"
 pytest = "^8.2.0"
 pytest-asyncio = "^0.23.7"
