@@ -9,7 +9,7 @@ python = "^3.12"
 
 # Define ACA-Py as an optional/extra dependancy so it can be
 # explicitly installed with the plugin if desired.
-aries-cloudagent = { git = "https://github.com/didx-xyz/aries-cloudagent-python.git", tag = "0.12.2b2" }
+aries-cloudagent = "1.0.0rc4"
 marshmallow = "^3.20.1"
 google-auth = "^2.25.2"
 google-api-python-client = "^2.134.0"

@@ -9,7 +9,7 @@ python = "^3.12"
 
 # Define ACA-Py as an optional/extra dependancy so it can be
 # explicitly installed with the plugin if desired.
-aries-cloudagent = { git = "https://github.com/didx-xyz/aries-cloudagent-python.git", tag = "0.12.2b2" }
+aries-cloudagent = "1.0.0rc4"
 aiokafka = "^0.11.0"
 ecdsa = "^0.19.0"
 pydantic = "^2.7.0"
