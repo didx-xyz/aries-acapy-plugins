@@ -7,10 +7,10 @@ license = "Apache-2.0"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 async-selective-queue = "^0.1.1"
 jsonrpc-api-proxy-client = { git = "https://github.com/Indicio-tech/json-rpc-api-proxy.git", subdirectory = "clients/python" }
-controller = { git = "https://github.com/Indicio-tech/acapy-minimal-example.git" }
+acapy-controller = { git = "https://github.com/Indicio-tech/acapy-minimal-example.git" }
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
