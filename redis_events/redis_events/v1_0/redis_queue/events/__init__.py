@@ -23,7 +23,7 @@ LOGGER = logging.getLogger(__name__)
 
 async def setup(context: InjectionContext):
     """Setup the plugin."""
-    LOGGER.info("> plugin setup...")
+    LOGGER.info("> Setting up redis plugin")
     config = get_config(context.settings).event or EventConfig.default()
 
     bus = context.inject(EventBus)
@@ -36,7 +36,7 @@ async def setup(context: InjectionContext):
 
     bus.subscribe(STARTUP_EVENT_PATTERN, on_startup)
     bus.subscribe(SHUTDOWN_EVENT_PATTERN, on_shutdown)
-    LOGGER.info("< plugin setup.")
+    LOGGER.info("< Successfully set up redis plugin.")
 
 
 RECORD_RE = re.compile(r"acapy::record::([^:]*)(?:::(.*))?")
@@ -46,23 +46,30 @@ WEBHOOK_RE = re.compile(r"acapy::webhook::{.*}")
 async def redis_setup(profile: Profile, event: Event) -> RedisCluster:
     """Connect, setup and return the Redis instance."""
     connection_url = (get_config(profile.settings).connection).connection_url
+    LOGGER.info(f"Connecting to Redis url: {connection_url}")
     try:
         redis = RedisCluster.from_url(url=connection_url)
+        LOGGER.info(f"RedisCluster object obtained from url: {redis}")
+        LOGGER.info("Pinging Redis cluster primaries")
         await redis.ping(target_nodes=RedisCluster.PRIMARIES)
+        LOGGER.info("Ping successful. Binding Redis instance.")
         profile.context.injector.bind_instance(RedisCluster, redis)
     except (RedisError, RedisClusterException) as err:
+        LOGGER.error(f"Caught error in Redis setup: {err}")
         raise TransportError(f"No Redis instance setup, {err}")
     return redis
 
 
 async def on_startup(profile: Profile, event: Event):
     """Setup Redis on startup."""
+    LOGGER.info("Setup Redis on startup")
     await redis_setup(profile, event)
+    LOGGER.info("Successfully setup Redis.")
 
 
 async def on_shutdown(profile: Profile, event: Event):
     """Called on shutdown."""
-    pass
+    LOGGER.info("Redis plugin shutdown hook called.")
 
 
 def _derive_category(topic: str):
