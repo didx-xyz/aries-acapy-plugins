@@ -10,7 +10,7 @@ python = "^3.12"
 
 # Define ACA-Py as an optional/extra dependancy so it can be
 # explicitly installed with the plugin if desired.
-aries-cloudagent = "1.0.0rc4"
+aries-cloudagent = "1.0.0rc5"
 aiohttp = "^3.9.5"
 aries-askar = "~0.3.0"
 aiohttp-cors = "^0.7.0"
