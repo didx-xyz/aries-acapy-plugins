@@ -9,8 +9,8 @@ from aries_cloudagent.askar.profile import AskarProfile
 from aries_cloudagent.config.injection_context import InjectionContext
 from aries_cloudagent.core.error import BaseError
 from aries_cloudagent.core.profile import Profile
-from aries_cloudagent.multitenant.askar_profile_manager import (
-    AskarProfileMultitenantManager,
+from aries_cloudagent.multitenant.single_wallet_askar_manager import (
+    SingleWalletAskarMultitenantManager,
 )
 from aries_cloudagent.multitenant.base import MultitenantManagerError
 from aries_cloudagent.multitenant.error import WalletKeyMissingError
@@ -304,7 +304,7 @@ class BasicMultitokenMultitenantManager(MultitenantManager):
         return wallet_record
 
 
-class AskarMultitokenMultitenantManager(AskarProfileMultitenantManager):
+class AskarMultitokenMultitenantManager(SingleWalletAskarMultitenantManager):
     """Askar multitenant manager for multitenant provider."""
 
     def __init__(self, profile: Profile, multitenant_profile: AskarProfile = None):
