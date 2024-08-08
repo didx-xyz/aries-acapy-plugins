@@ -194,13 +194,13 @@ yaml = ["PyYAML (>=3.10)"]
 
 [[package]]
 name = "aries-cloudagent"
-version = "1.0.0rc5"
+version = "1.0.0rc6"
 description = "Hyperledger Aries Cloud Agent Python (ACA-Py) is a foundation for building decentralized identity applications and services running in non-mobile environments."
 optional = false
 python-versions = "<4.0,>=3.12"
 files = [
-    {file = "aries_cloudagent-1.0.0rc5-py3-none-any.whl", hash = "sha256:045019b76c4fc7b644d60c7048e464451d7384844852c0ef26a64beb0f4ac061"},
-    {file = "aries_cloudagent-1.0.0rc5.tar.gz", hash = "sha256:be58b92660ecb7614fe038b4e29085f7f361b7725ec984993b949114c6b91b12"},
+    {file = "aries_cloudagent-1.0.0rc6-py3-none-any.whl", hash = "sha256:cbb1b6b4c958631ed196602266ba65e4bf55df09e94ae997b8ca3364b596b354"},
+    {file = "aries_cloudagent-1.0.0rc6.tar.gz", hash = "sha256:2ab3ae6bd87117877d5383777c2364285f9e8505a7984939644b5aa3eec2bc2c"},
 ]
 
 [package.dependencies]
@@ -2375,4 +2375,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "e4cb4f4acef848c065e119cdc96e9fc802c6bea9d9e39022942d799984b62a2d"
+content-hash = "96b4c886975e5f1bfa65fd278495fbf80b0ddc88461ac9ba5037b858ce71ddf3"
