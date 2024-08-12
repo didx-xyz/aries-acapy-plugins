@@ -7,7 +7,7 @@ authors = ["Shaanjot Gill <gill.shaanjots@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.12"
 redis = "^5.0.7"
-aiohttp = "^3.9.5"
+aiohttp = "^3.10.3"
 fastapi-slim = "^0.112.0"
 uvicorn = "^0.30.1"
 nest-asyncio = "^1.5.5"
