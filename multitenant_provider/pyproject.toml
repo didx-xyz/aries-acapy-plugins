@@ -9,7 +9,7 @@ python = "^3.12"
 
 # Define ACA-Py as an optional/extra dependancy so it can be
 # explicitly installed with the plugin if desired.
-aries-cloudagent = "1.0.0"
+aries-cloudagent = { git = "https://github.com/ff137/aries-cloudagent-python.git", branch = "feat/pagination-ordering" }
 bcrypt = "^4.1.3"
 mergedeep = "^1.3.4"
 python-dateutil = "^2.8.2"
