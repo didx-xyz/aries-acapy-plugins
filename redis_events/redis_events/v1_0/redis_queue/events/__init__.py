@@ -46,7 +46,10 @@ WEBHOOK_RE = re.compile(r"acapy::webhook::{.*}")
 async def redis_setup(profile: Profile, event: Event) -> RedisCluster:
     """Connect, setup and return the Redis instance."""
     connection_url = (get_config(profile.settings).connection).connection_url
-    LOGGER.info(f"Connecting to Redis url: {connection_url}")
+    connection_url_no_pass = (
+        connection_url.split("@")[-1] if "@" in connection_url else connection_url
+    )
+    LOGGER.info(f"Connecting to Redis url: {connection_url_no_pass}")
     try:
         redis = RedisCluster.from_url(url=connection_url)
         LOGGER.info(f"RedisCluster object obtained from url: {redis}")
