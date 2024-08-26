@@ -341,13 +341,13 @@ toml = ["tomli"]
 
 [[package]]
 name = "fastapi-slim"
-version = "0.112.1"
+version = "0.112.2"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "fastapi_slim-0.112.1-py3-none-any.whl", hash = "sha256:cc227cf9402d0ba54a24f80eb205c33bcb25d3ea18d53fdac3fd76ea5af8e76d"},
-    {file = "fastapi_slim-0.112.1.tar.gz", hash = "sha256:876ebd24e72273986709db2d469b75dc18f04c3ab9140ffd78b29d7785d26687"},
+    {file = "fastapi_slim-0.112.2-py3-none-any.whl", hash = "sha256:c023f74768f187af142c2fe5ff9e4ca3c4c1940bbde7df008cb283532422a23f"},
+    {file = "fastapi_slim-0.112.2.tar.gz", hash = "sha256:75b8eb0c6ee05a20270da7a527ac7ad53b83414602f42b68f7027484dab3aedb"},
 ]
 
 [package.dependencies]
@@ -356,8 +356,8 @@ starlette = ">=0.37.2,<0.39.0"
 typing-extensions = ">=4.8.0"
 
 [package.extras]
-all = ["email_validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "itsdangerous (>=1.1.0)", "jinja2 (>=2.11.2)", "orjson (>=3.2.1)", "pydantic-extra-types (>=2.0.0)", "pydantic-settings (>=2.0.0)", "python-multipart (>=0.0.7)", "pyyaml (>=5.3.1)", "ujson (>=4.0.1,!=4.0.2,!=4.1.0,!=4.2.0,!=4.3.0,!=5.0.0,!=5.1.0)", "uvicorn[standard] (>=0.12.0)"]
-standard = ["email_validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "jinja2 (>=2.11.2)", "python-multipart (>=0.0.7)", "uvicorn[standard] (>=0.12.0)"]
+all = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "itsdangerous (>=1.1.0)", "jinja2 (>=2.11.2)", "orjson (>=3.2.1)", "pydantic-extra-types (>=2.0.0)", "pydantic-settings (>=2.0.0)", "python-multipart (>=0.0.7)", "pyyaml (>=5.3.1)", "ujson (>=4.0.1,!=4.0.2,!=4.1.0,!=4.2.0,!=4.3.0,!=5.0.0,!=5.1.0)", "uvicorn[standard] (>=0.12.0)"]
+standard = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "jinja2 (>=2.11.2)", "python-multipart (>=0.0.7)", "uvicorn[standard] (>=0.12.0)"]
 
 [[package]]
 name = "frozenlist"
@@ -1049,4 +1049,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "32cae9f15861d8000fe0fb4c1510e4cb5953af0452dacfb78d2a92f04d233309"
+content-hash = "75041c8f35fab65c8d705816e3ea6653e8248346b8f72a4054558d65d00be5e9"
