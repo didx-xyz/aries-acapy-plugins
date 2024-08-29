@@ -4,7 +4,7 @@
 name = "aiohappyeyeballs"
 version = "2.4.0"
 description = "Happy Eyeballs for asyncio"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "aiohappyeyeballs-2.4.0-py3-none-any.whl", hash = "sha256:7ce92076e249169a13c2f49320d1967425eaf1f407522d707d59cac7628d62bd"},
@@ -15,7 +15,7 @@ files = [
 name = "aiohttp"
 version = "3.10.5"
 description = "Async http client/server framework (asyncio)"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "aiohttp-3.10.5-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:18a01eba2574fb9edd5f6e5fb25f66e6ce061da5dab5db75e13fe1558142e0a3"},
@@ -126,7 +126,7 @@ speedups = ["Brotli", "aiodns (>=3.2.0)", "brotlicffi"]
 name = "aiohttp-apispec-acapy"
 version = "3.0.2"
 description = "Build and document REST APIs with aiohttp and apispec"
-optional = false
+optional = true
 python-versions = ">=3.9"
 files = [
     {file = "aiohttp-apispec-acapy-3.0.2.tar.gz", hash = "sha256:9e6946a48cb70d3f7097f51e2ce7ba8bee32fce9d654454fe300930bfa8ce542"},
@@ -143,7 +143,7 @@ webargs = ">=8.4.0,<8.5.0"
 name = "aiohttp-cors"
 version = "0.7.0"
 description = "CORS support for aiohttp"
-optional = false
+optional = true
 python-versions = "*"
 files = [
     {file = "aiohttp-cors-0.7.0.tar.gz", hash = "sha256:4d39c6d7100fd9764ed1caf8cebf0eb01bf5e3f24e2e073fda6234bc48b19f5d"},
@@ -157,7 +157,7 @@ aiohttp = ">=1.1"
 name = "aiosignal"
 version = "1.3.1"
 description = "aiosignal: a list of registered asynchronous callbacks"
-optional = false
+optional = true
 python-versions = ">=3.7"
 files = [
     {file = "aiosignal-1.3.1-py3-none-any.whl", hash = "sha256:f8376fb07dd1e86a584e4fcdec80b36b7f81aac666ebc724e2c090300dd83b17"},
@@ -171,7 +171,7 @@ frozenlist = ">=1.1.0"
 name = "annotated-types"
 version = "0.7.0"
 description = "Reusable constraint types to use with typing.Annotated"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "annotated_types-0.7.0-py3-none-any.whl", hash = "sha256:1f02e8b43a8fbbc3f3e0d4f0f4bfc8131bcb4eebe8849b8e5c773f3a1c582a53"},
@@ -195,7 +195,7 @@ files = [
 name = "apispec"
 version = "6.6.1"
 description = "A pluggable API specification generator. Currently supports the OpenAPI Specification (f.k.a. the Swagger specification)."
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "apispec-6.6.1-py3-none-any.whl", hash = "sha256:6460315cb38ac6a2ff42d9e2b8dc0435c37d4428d3abeda96ff97b5dc8eb6b94"},
@@ -230,63 +230,59 @@ cached-property = ">=1.5.2,<1.6.0"
 
 [[package]]
 name = "aries-cloudagent"
-version = "1.0.0b0"
-description = "Hyperledger Aries Cloud Agent Python (ACA-Py) is a foundation for building decentralized identity applications and services running in non-mobile environments. "
-optional = false
-python-versions = "^3.12"
-files = []
-develop = false
+version = "1.0.0"
+description = "Hyperledger Aries Cloud Agent Python (ACA-Py) is a foundation for building decentralized identity applications and services running in non-mobile environments."
+optional = true
+python-versions = "<4.0,>=3.12"
+files = [
+    {file = "aries_cloudagent-1.0.0-py3-none-any.whl", hash = "sha256:807ce84090d607bd6a595a3e8d0a3935f6c9a24bcddaa189a4e32dd65adb2b80"},
+    {file = "aries_cloudagent-1.0.0.tar.gz", hash = "sha256:2ab701357d38c9ae1922157a0449340c447dd97eab68d178b09d3a13b2d6276d"},
+]
 
 [package.dependencies]
-aiohttp = "~3.10.3"
-aiohttp-apispec-acapy = "~3.0.2"
-aiohttp-cors = "~0.7.0"
-apispec = "^6.6.0"
-async-timeout = "~4.0.2"
-base58 = "~2.1.0"
-ConfigArgParse = "~1.7"
-deepmerge = "~0.3.0"
-did-peer-2 = "^0.1.2"
-did-peer-4 = "^0.1.4"
-ecdsa = "~0.19.0"
+aiohttp = ">=3.10.3,<3.11.0"
+aiohttp-apispec-acapy = ">=3.0.2,<3.1.0"
+aiohttp-cors = ">=0.7.0,<0.8.0"
+apispec = ">=6.6.0,<7.0.0"
+async-timeout = ">=4.0.2,<4.1.0"
+base58 = ">=2.1.0,<2.2.0"
+ConfigArgParse = ">=1.7,<1.8"
+deepmerge = ">=0.3.0,<0.4.0"
+did-peer-2 = ">=0.1.2,<0.2.0"
+did-peer-4 = ">=0.1.4,<0.2.0"
+ecdsa = ">=0.19.0,<0.20.0"
 jsonpath-ng = "1.6.1"
-Markdown = "~3.6"
+Markdown = ">=3.6,<3.7"
 markupsafe = "2.1.5"
-marshmallow = "~3.21.3"
-nest_asyncio = "~1.6.0"
-packaging = "~23.2"
-portalocker = "~2.10.1"
+marshmallow = ">=3.21.3,<3.22.0"
+nest_asyncio = ">=1.6.0,<1.7.0"
+packaging = ">=23.2,<23.3"
+portalocker = ">=2.10.1,<2.11.0"
 prompt_toolkit = ">=2.0.9,<2.1.0"
-pydid = "^0.5.1"
-pyjwt = "~2.9.0"
-pyld = "^2.0.4"
-pynacl = "~1.5.0"
-python-dateutil = "~2.8.1"
-python-json-logger = "~2.0.7"
-pyyaml = "~6.0.2"
+pydid = ">=0.5.1,<0.6.0"
+pyjwt = ">=2.9.0,<2.10.0"
+pyld = ">=2.0.4,<3.0.0"
+pynacl = ">=1.5.0,<1.6.0"
+python-dateutil = ">=2.8.1,<2.9.0"
+python-json-logger = ">=2.0.7,<2.1.0"
+pyyaml = ">=6.0.2,<6.1.0"
 qrcode = {version = ">=6.1,<7.0", extras = ["pil"]}
-requests = "~2.32.3"
+requests = ">=2.32.3,<2.33.0"
 rlp = "4.0.1"
-sd-jwt = "^0.10.3"
-unflatten = "~0.1"
-uuid_utils = "^0.9.0"
+sd-jwt = ">=0.10.3,<0.11.0"
+unflatten = ">=0.1,<0.2"
+uuid_utils = ">=0.9.0,<0.10.0"
 
 [package.extras]
-askar = ["anoncreds (==0.2.0)", "aries-askar-ff137 (==0.3.3b0)", "indy-credx (>=1.1.1,<1.2.0)", "indy-vdr (>=0.4.0,<0.5.0)"]
+askar = ["anoncreds (==0.2.0)", "aries-askar (>=0.3.2,<0.4.0)", "indy-credx (>=1.1.1,<1.2.0)", "indy-vdr (>=0.4.0,<0.5.0)"]
 bbs = ["ursa-bbs-signatures (>=1.0.1,<1.1.0)"]
 didcommv2 = ["didcomm-messaging (>=0.1.1a0,<0.2.0)"]
-
-[package.source]
-type = "git"
-url = "https://github.com/didx-xyz/aries-cloudagent-python.git"
-reference = "1.0.0b0"
-resolved_reference = "38ab0031741d89c96edfe2e29357fe14ac8ac8db"
 
 [[package]]
 name = "async-timeout"
 version = "4.0.3"
 description = "Timeout context manager for asyncio programs"
-optional = false
+optional = true
 python-versions = ">=3.7"
 files = [
     {file = "async-timeout-4.0.3.tar.gz", hash = "sha256:4640d96be84d82d02ed59ea2b7105a0f7b33abe8703703cd0ab0bf87c427522f"},
@@ -297,7 +293,7 @@ files = [
 name = "attrs"
 version = "24.2.0"
 description = "Classes Without Boilerplate"
-optional = false
+optional = true
 python-versions = ">=3.7"
 files = [
     {file = "attrs-24.2.0-py3-none-any.whl", hash = "sha256:81921eb96de3191c8258c199618104dd27ac608d9366f5e35d011eae1867ede2"},
@@ -425,7 +421,7 @@ files = [
 name = "cachetools"
 version = "5.5.0"
 description = "Extensible memoizing collections and decorators"
-optional = false
+optional = true
 python-versions = ">=3.7"
 files = [
     {file = "cachetools-5.5.0-py3-none-any.whl", hash = "sha256:02134e8439cdc2ffb62023ce1debca2944c3f289d66bb17ead3ab3dede74b292"},
@@ -436,7 +432,7 @@ files = [
 name = "certifi"
 version = "2024.7.4"
 description = "Python package for providing Mozilla's CA Bundle."
-optional = false
+optional = true
 python-versions = ">=3.6"
 files = [
     {file = "certifi-2024.7.4-py3-none-any.whl", hash = "sha256:c198e21b1289c2ab85ee4e67bb4b4ef3ead0892059901a8d5b622f24a1101e90"},
@@ -447,7 +443,7 @@ files = [
 name = "cffi"
 version = "1.17.0"
 description = "Foreign Function Interface for Python calling C code."
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "cffi-1.17.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:f9338cc05451f1942d0d8203ec2c346c830f8e86469903d5126c1f0a13a2bcbb"},
@@ -526,7 +522,7 @@ pycparser = "*"
 name = "charset-normalizer"
 version = "3.3.2"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
-optional = false
+optional = true
 python-versions = ">=3.7.0"
 files = [
     {file = "charset-normalizer-3.3.2.tar.gz", hash = "sha256:f30c3cb33b24454a82faecaf01b19c18562b1e89558fb6c56de4d9118a032fd5"},
@@ -650,7 +646,7 @@ files = [
 name = "configargparse"
 version = "1.7"
 description = "A drop-in replacement for argparse that allows options to also be set via config files and/or environment variables."
-optional = false
+optional = true
 python-versions = ">=3.5"
 files = [
     {file = "ConfigArgParse-1.7-py3-none-any.whl", hash = "sha256:d249da6591465c6c26df64a9f73d2536e743be2f244eb3ebe61114af2f94f86b"},
@@ -749,7 +745,7 @@ toml = ["tomli"]
 name = "cryptography"
 version = "43.0.0"
 description = "cryptography is a package which provides cryptographic recipes and primitives to Python developers."
-optional = false
+optional = true
 python-versions = ">=3.7"
 files = [
     {file = "cryptography-43.0.0-cp37-abi3-macosx_10_9_universal2.whl", hash = "sha256:64c3f16e2a4fc51c0d06af28441881f98c5d91009b8caaff40cf3548089e9c74"},
@@ -798,7 +794,7 @@ test-randomorder = ["pytest-randomly"]
 name = "cytoolz"
 version = "0.12.3"
 description = "Cython implementation of Toolz: High performance functional utilities"
-optional = false
+optional = true
 python-versions = ">=3.7"
 files = [
     {file = "cytoolz-0.12.3-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:bbe58e26c84b163beba0fbeacf6b065feabc8f75c6d3fe305550d33f24a2d346"},
@@ -917,7 +913,7 @@ cython = ["cython"]
 name = "deepmerge"
 version = "0.3.0"
 description = "a toolset to deeply merge python dictionaries."
-optional = false
+optional = true
 python-versions = ">=3"
 files = [
     {file = "deepmerge-0.3.0-py2.py3-none-any.whl", hash = "sha256:87166dbe9ba1a3348a45c9d4ada6778f518d41afc0b85aa017ea3041facc3f9c"},
@@ -928,7 +924,7 @@ files = [
 name = "did-peer-2"
 version = "0.1.2"
 description = "An implementation of did:peer:2"
-optional = false
+optional = true
 python-versions = ">=3.9"
 files = [
     {file = "did_peer_2-0.1.2-py3-none-any.whl", hash = "sha256:d5908cda2d52b7c34428a421044507d7847fd79b78dc8360441c408f4507d612"},
@@ -942,7 +938,7 @@ base58 = ">=2.1.1"
 name = "did-peer-4"
 version = "0.1.4"
 description = "An implementation of did:peer:4"
-optional = false
+optional = true
 python-versions = ">=3.9"
 files = [
     {file = "did_peer_4-0.1.4-py3-none-any.whl", hash = "sha256:4c2bb42a55e4fec08fe008a1585db2f11fe19e36121f8919991add027d7c816f"},
@@ -956,7 +952,7 @@ base58 = ">=2.1.1"
 name = "ecdsa"
 version = "0.19.0"
 description = "ECDSA cryptographic signature library (pure python)"
-optional = false
+optional = true
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.6"
 files = [
     {file = "ecdsa-0.19.0-py2.py3-none-any.whl", hash = "sha256:2cea9b88407fdac7bbeca0833b189e4c9c53f2ef1e1eaa29f6224dbc809b707a"},
@@ -974,7 +970,7 @@ gmpy2 = ["gmpy2"]
 name = "eth-hash"
 version = "0.7.0"
 description = "eth-hash: The Ethereum hashing function, keccak256, sometimes (erroneously) called sha3"
-optional = false
+optional = true
 python-versions = ">=3.8, <4"
 files = [
     {file = "eth-hash-0.7.0.tar.gz", hash = "sha256:bacdc705bfd85dadd055ecd35fd1b4f846b671add101427e089a4ca2e8db310a"},
@@ -992,7 +988,7 @@ test = ["pytest (>=7.0.0)", "pytest-xdist (>=2.4.0)"]
 name = "eth-typing"
 version = "5.0.0"
 description = "eth-typing: Common type annotations for ethereum python packages"
-optional = false
+optional = true
 python-versions = "<4,>=3.8"
 files = [
     {file = "eth_typing-5.0.0-py3-none-any.whl", hash = "sha256:c7ebc8595e7b65175bb4b4176c2b548ab21b13329f2058e84d4f8c289ba9f577"},
@@ -1011,7 +1007,7 @@ test = ["pytest (>=7.0.0)", "pytest-xdist (>=2.4.0)"]
 name = "eth-utils"
 version = "5.0.0"
 description = "eth-utils: Common utility functions for python code that interacts with Ethereum"
-optional = false
+optional = true
 python-versions = "<4,>=3.8"
 files = [
     {file = "eth_utils-5.0.0-py3-none-any.whl", hash = "sha256:99c44eca11db74dbb881a1d70b24cd80436fc62fe527d2f5c3e3cf7932aba7b2"},
@@ -1034,7 +1030,7 @@ test = ["hypothesis (>=4.43.0)", "mypy (==1.10.0)", "pytest (>=7.0.0)", "pytest-
 name = "frozendict"
 version = "2.4.4"
 description = "A simple immutable dictionary"
-optional = false
+optional = true
 python-versions = ">=3.6"
 files = [
     {file = "frozendict-2.4.4-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:4a59578d47b3949437519b5c39a016a6116b9e787bb19289e333faae81462e59"},
@@ -1074,7 +1070,7 @@ files = [
 name = "frozenlist"
 version = "1.4.1"
 description = "A list-like structure which implements collections.abc.MutableSequence"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "frozenlist-1.4.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:f9aa1878d1083b276b0196f2dfbe00c9b7e752475ed3b682025ff20c1c1f51ac"},
@@ -1160,7 +1156,7 @@ files = [
 name = "hexbytes"
 version = "1.2.1"
 description = "hexbytes: Python `bytes` subclass that decodes hex, with a readable console output"
-optional = false
+optional = true
 python-versions = "<4,>=3.8"
 files = [
     {file = "hexbytes-1.2.1-py3-none-any.whl", hash = "sha256:e64890b203a31f4a23ef11470ecfcca565beaee9198df623047df322b757471a"},
@@ -1176,7 +1172,7 @@ test = ["eth-utils (>=2.0.0)", "hypothesis (>=3.44.24,<=6.31.6)", "pytest (>=7.0
 name = "idna"
 version = "3.8"
 description = "Internationalized Domain Names in Applications (IDNA)"
-optional = false
+optional = true
 python-versions = ">=3.6"
 files = [
     {file = "idna-3.8-py3-none-any.whl", hash = "sha256:050b4e5baadcd44d760cedbd2b8e639f2ff89bbc7a5730fcc662954303377aac"},
@@ -1213,7 +1209,7 @@ files = [
 name = "inflection"
 version = "0.5.1"
 description = "A port of Ruby on Rails inflector to Python"
-optional = false
+optional = true
 python-versions = ">=3.5"
 files = [
     {file = "inflection-0.5.1-py2.py3-none-any.whl", hash = "sha256:f38b2b640938a4f35ade69ac3d053042959b62a0f1076a5bbaa1b9526605a8a2"},
@@ -1235,7 +1231,7 @@ files = [
 name = "jinja2"
 version = "3.1.4"
 description = "A very fast and expressive template engine."
-optional = false
+optional = true
 python-versions = ">=3.7"
 files = [
     {file = "jinja2-3.1.4-py3-none-any.whl", hash = "sha256:bc5dd2abb727a5319567b7a813e6a2e7318c39f4f487cfe6c89c6f9c7d25197d"},
@@ -1252,7 +1248,7 @@ i18n = ["Babel (>=2.7)"]
 name = "jsonpath-ng"
 version = "1.6.1"
 description = "A final implementation of JSONPath for Python that aims to be standard compliant, including arithmetic and binary comparison operators and providing clear AST for metaprogramming."
-optional = false
+optional = true
 python-versions = "*"
 files = [
     {file = "jsonpath-ng-1.6.1.tar.gz", hash = "sha256:086c37ba4917304850bd837aeab806670224d3f038fe2833ff593a672ef0a5fa"},
@@ -1266,7 +1262,7 @@ ply = "*"
 name = "jwcrypto"
 version = "1.5.6"
 description = "Implementation of JOSE Web standards"
-optional = false
+optional = true
 python-versions = ">= 3.8"
 files = [
     {file = "jwcrypto-1.5.6-py3-none-any.whl", hash = "sha256:150d2b0ebbdb8f40b77f543fb44ffd2baeff48788be71f67f03566692fd55789"},
@@ -1281,7 +1277,7 @@ typing-extensions = ">=4.5.0"
 name = "lxml"
 version = "5.3.0"
 description = "Powerful and Pythonic XML processing library combining libxml2/libxslt with the ElementTree API."
-optional = false
+optional = true
 python-versions = ">=3.6"
 files = [
     {file = "lxml-5.3.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:dd36439be765e2dde7660212b5275641edbc813e7b24668831a5c8ac91180656"},
@@ -1435,7 +1431,7 @@ source = ["Cython (>=3.0.11)"]
 name = "markdown"
 version = "3.6"
 description = "Python implementation of John Gruber's Markdown."
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "Markdown-3.6-py3-none-any.whl", hash = "sha256:48f276f4d8cfb8ce6527c8f79e2ee29708508bf4d40aa410fbc3b4ee832c850f"},
@@ -1450,7 +1446,7 @@ testing = ["coverage", "pyyaml"]
 name = "markupsafe"
 version = "2.1.5"
 description = "Safely add untrusted strings to HTML/XML markup."
-optional = false
+optional = true
 python-versions = ">=3.7"
 files = [
     {file = "MarkupSafe-2.1.5-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:a17a92de5231666cfbe003f0e4b9b3a7ae3afb1ec2845aadc2bacc93ff85febc"},
@@ -1519,7 +1515,7 @@ files = [
 name = "marshmallow"
 version = "3.21.3"
 description = "A lightweight library for converting complex datatypes to and from native Python datatypes."
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "marshmallow-3.21.3-py3-none-any.whl", hash = "sha256:86ce7fb914aa865001a4b2092c4c2872d13bc347f3d42673272cabfdbad386f1"},
@@ -1549,7 +1545,7 @@ files = [
 name = "multidict"
 version = "6.0.5"
 description = "multidict implementation"
-optional = false
+optional = true
 python-versions = ">=3.7"
 files = [
     {file = "multidict-6.0.5-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:228b644ae063c10e7f324ab1ab6b548bdf6f8b47f3ec234fef1093bc2735e5f9"},
@@ -1659,7 +1655,7 @@ files = [
 name = "nest-asyncio"
 version = "1.6.0"
 description = "Patch asyncio to allow nested event loops"
-optional = false
+optional = true
 python-versions = ">=3.5"
 files = [
     {file = "nest_asyncio-1.6.0-py3-none-any.whl", hash = "sha256:87af6efd6b5e897c81050477ef65c62e2b2f35d51703cae01aff2905b1852e1c"},
@@ -1692,7 +1688,7 @@ files = [
 name = "pillow"
 version = "10.4.0"
 description = "Python Imaging Library (Fork)"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "pillow-10.4.0-cp310-cp310-macosx_10_10_x86_64.whl", hash = "sha256:4d9667937cfa347525b319ae34375c37b9ee6b525440f3ef48542fcf66f2731e"},
@@ -1820,7 +1816,7 @@ testing = ["pytest", "pytest-benchmark"]
 name = "ply"
 version = "3.11"
 description = "Python Lex & Yacc"
-optional = false
+optional = true
 python-versions = "*"
 files = [
     {file = "ply-3.11-py2.py3-none-any.whl", hash = "sha256:096f9b8350b65ebd2fd1346b12452efe5b9607f7482813ffca50c22722a807ce"},
@@ -1831,7 +1827,7 @@ files = [
 name = "portalocker"
 version = "2.10.1"
 description = "Wraps the portalocker recipe for easy usage"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "portalocker-2.10.1-py3-none-any.whl", hash = "sha256:53a5984ebc86a025552264b459b46a2086e269b21823cb572f8f28ee759e45bf"},
@@ -1850,7 +1846,7 @@ tests = ["pytest (>=5.4.1)", "pytest-cov (>=2.8.1)", "pytest-mypy (>=0.8.0)", "p
 name = "prompt-toolkit"
 version = "2.0.10"
 description = "Library for building powerful interactive command lines in Python"
-optional = false
+optional = true
 python-versions = ">=2.6,<3.0.dev0 || >=3.3.dev0"
 files = [
     {file = "prompt_toolkit-2.0.10-py2-none-any.whl", hash = "sha256:e7f8af9e3d70f514373bf41aa51bc33af12a6db3f71461ea47fea985defb2c31"},
@@ -1866,7 +1862,7 @@ wcwidth = "*"
 name = "pycparser"
 version = "2.22"
 description = "C parser in Python"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "pycparser-2.22-py3-none-any.whl", hash = "sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc"},
@@ -1877,7 +1873,7 @@ files = [
 name = "pydantic"
 version = "2.8.2"
 description = "Data validation using Python type hints"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "pydantic-2.8.2-py3-none-any.whl", hash = "sha256:73ee9fddd406dc318b885c7a2eab8a6472b68b8fb5ba8150949fc3db939f23c8"},
@@ -1899,7 +1895,7 @@ email = ["email-validator (>=2.0.0)"]
 name = "pydantic-core"
 version = "2.20.1"
 description = "Core functionality for Pydantic validation and serialization"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "pydantic_core-2.20.1-cp310-cp310-macosx_10_12_x86_64.whl", hash = "sha256:3acae97ffd19bf091c72df4d726d552c473f3576409b2a7ca36b2f535ffff4a3"},
@@ -2000,7 +1996,7 @@ typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 name = "pydid"
 version = "0.5.1"
 description = "Python library for validating, constructing, and representing DIDs and DID Documents"
-optional = false
+optional = true
 python-versions = "<4.0.0,>=3.9.0"
 files = [
     {file = "pydid-0.5.1-py3-none-any.whl", hash = "sha256:be89df79b6267ec1814d49cdd240262c8bbddbfcee9e3aad97a97d521620d6c4"},
@@ -2016,7 +2012,7 @@ typing-extensions = ">=4.7.0,<5.0.0"
 name = "pyjwt"
 version = "2.9.0"
 description = "JSON Web Token implementation in Python"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "PyJWT-2.9.0-py3-none-any.whl", hash = "sha256:3b02fb0f44517787776cf48f2ae25d8e14f300e6d7545a4315cee571a415e850"},
@@ -2033,7 +2029,7 @@ tests = ["coverage[toml] (==5.0.4)", "pytest (>=6.0.0,<7.0.0)"]
 name = "pyld"
 version = "2.0.4"
 description = "Python implementation of the JSON-LD API"
-optional = false
+optional = true
 python-versions = "*"
 files = [
     {file = "PyLD-2.0.4-py3-none-any.whl", hash = "sha256:6dab9905644616df33f8755489fc9b354ed7d832d387b7d1974b4fbd3b8d2a89"},
@@ -2055,7 +2051,7 @@ requests = ["requests"]
 name = "pynacl"
 version = "1.5.0"
 description = "Python binding to the Networking and Cryptography (NaCl) library"
-optional = false
+optional = true
 python-versions = ">=3.6"
 files = [
     {file = "PyNaCl-1.5.0-cp36-abi3-macosx_10_10_universal2.whl", hash = "sha256:401002a4aaa07c9414132aaed7f6836ff98f59277a234704ff66878c2ee4a0d1"},
@@ -2166,7 +2162,7 @@ six = ">=1.5"
 name = "python-json-logger"
 version = "2.0.7"
 description = "A python library adding a json log formatter"
-optional = false
+optional = true
 python-versions = ">=3.6"
 files = [
     {file = "python-json-logger-2.0.7.tar.gz", hash = "sha256:23e7ec02d34237c5aa1e29a070193a4ea87583bb4e7f8fd06d3de8264c4b2e1c"},
@@ -2193,7 +2189,7 @@ test = ["base58", "pytest (<3.7)", "pytest-asyncio (==0.10.0)"]
 name = "pywin32"
 version = "306"
 description = "Python for Window Extensions"
-optional = false
+optional = true
 python-versions = "*"
 files = [
     {file = "pywin32-306-cp310-cp310-win32.whl", hash = "sha256:06d3420a5155ba65f0b72f2699b5bacf3109f36acbe8923765c22938a69dfc8d"},
@@ -2216,7 +2212,7 @@ files = [
 name = "pyyaml"
 version = "6.0.2"
 description = "YAML parser and emitter for Python"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "PyYAML-6.0.2-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:0a9a2848a5b7feac301353437eb7d5957887edbf81d56e903999a75a3d743086"},
@@ -2278,7 +2274,7 @@ files = [
 name = "qrcode"
 version = "6.1"
 description = "QR Code image generator"
-optional = false
+optional = true
 python-versions = "*"
 files = [
     {file = "qrcode-6.1-py2.py3-none-any.whl", hash = "sha256:3996ee560fc39532910603704c82980ff6d4d5d629f9c3f25f34174ce8606cf5"},
@@ -2300,7 +2296,7 @@ test = ["mock", "pytest", "pytest-cov"]
 name = "requests"
 version = "2.32.3"
 description = "Python HTTP for Humans."
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "requests-2.32.3-py3-none-any.whl", hash = "sha256:70761cfe03c773ceb22aa2f671b4757976145175cdfca038c02654d061d6dcc6"},
@@ -2321,7 +2317,7 @@ use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 name = "rlp"
 version = "4.0.1"
 description = "rlp: A package for Recursive Length Prefix encoding and decoding"
-optional = false
+optional = true
 python-versions = "<4,>=3.8"
 files = [
     {file = "rlp-4.0.1-py3-none-any.whl", hash = "sha256:ff6846c3c27b97ee0492373aa074a7c3046aadd973320f4fffa7ac45564b0258"},
@@ -2368,7 +2364,7 @@ files = [
 name = "sd-jwt"
 version = "0.10.4"
 description = "The reference implementation of the IETF SD-JWT specification."
-optional = false
+optional = true
 python-versions = ">=3.8,<4.0"
 files = [
     {file = "sd_jwt-0.10.4-py3-none-any.whl", hash = "sha256:d7ae669eb5d51bceeb38e0df8ab2faddd12e3b21ab64d831b6d048fc1e00ce75"},
@@ -2394,7 +2390,7 @@ files = [
 name = "toolz"
 version = "0.12.1"
 description = "List processing tools and functional utilities"
-optional = false
+optional = true
 python-versions = ">=3.7"
 files = [
     {file = "toolz-0.12.1-py3-none-any.whl", hash = "sha256:d22731364c07d72eea0a0ad45bafb2c2937ab6fd38a3507bf55eae8744aa7d85"},
@@ -2405,7 +2401,7 @@ files = [
 name = "typing-extensions"
 version = "4.12.2"
 description = "Backported and Experimental Type Hints for Python 3.8+"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "typing_extensions-4.12.2-py3-none-any.whl", hash = "sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d"},
@@ -2416,7 +2412,7 @@ files = [
 name = "unflatten"
 version = "0.1.1"
 description = "Unflatten dict to dict with nested dict/arrays"
-optional = false
+optional = true
 python-versions = "*"
 files = [
     {file = "unflatten-0.1.1-py2.py3-none-any.whl", hash = "sha256:42de0eae963f34cbb8d80a35cdab962f723b879a3e93c603fac9ca6062e96de3"},
@@ -2427,7 +2423,7 @@ files = [
 name = "urllib3"
 version = "2.2.2"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "urllib3-2.2.2-py3-none-any.whl", hash = "sha256:a448b2f64d686155468037e1ace9f2d2199776e17f0a46610480d311f73e3472"},
@@ -2456,7 +2452,7 @@ files = [
 name = "uuid-utils"
 version = "0.9.0"
 description = "Drop-in replacement for Python UUID in Rust"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "uuid_utils-0.9.0-cp310-cp310-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl", hash = "sha256:28da15c275ef06a759efe0fcba7c58eab8ae2217f7a7f66289dee6ae332605a0"},
@@ -2541,7 +2537,7 @@ files = [
 name = "wcwidth"
 version = "0.2.13"
 description = "Measures the displayed width of unicode strings in a terminal"
-optional = false
+optional = true
 python-versions = "*"
 files = [
     {file = "wcwidth-0.2.13-py2.py3-none-any.whl", hash = "sha256:3da69048e4540d84af32131829ff948f1e022c1c6bdb8d6102117aac784f6859"},
@@ -2552,7 +2548,7 @@ files = [
 name = "webargs"
 version = "8.4.0"
 description = "Declarative parsing and validation of HTTP request objects, with built-in support for popular web frameworks, including Flask, Django, Bottle, Tornado, Pyramid, Falcon, and aiohttp."
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "webargs-8.4.0-py3-none-any.whl", hash = "sha256:22324305fbca6a2c4cce1235280e8b56372fb3211a8dac2ac8ed1948315a6f53"},
@@ -2574,7 +2570,7 @@ tests = ["Django (>=2.2.0)", "Flask (>=0.12.5)", "aiohttp (>=3.0.8)", "bottle (>
 name = "yarl"
 version = "1.9.4"
 description = "Yet another URL library"
-optional = false
+optional = true
 python-versions = ">=3.7"
 files = [
     {file = "yarl-1.9.4-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:a8c1df72eb746f4136fe9a2e72b0c9dc1da1cbd23b5372f94b5820ff8ae30e0e"},
@@ -2679,4 +2675,4 @@ aca-py = ["aries-cloudagent"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "3408e5face574fbd4b5036c763e1d75577ec7c703aed524a19d5997e589fc54a"
+content-hash = "ecd66432ec1ad52311a419779de5e73e689ed33428a75c1c5e19bca2df809aa2"
