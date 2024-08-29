@@ -221,7 +221,7 @@ yaml = ["PyYAML (>=3.10)"]
 
 [[package]]
 name = "aries-cloudagent"
-version = "1.0.0"
+version = "1.0.0b0"
 description = "Hyperledger Aries Cloud Agent Python (ACA-Py) is a foundation for building decentralized identity applications and services running in non-mobile environments. "
 optional = false
 python-versions = "^3.12"
@@ -229,7 +229,7 @@ files = []
 develop = false
 
 [package.dependencies]
-aiohttp = "~3.10.4"
+aiohttp = "~3.10.3"
 aiohttp-apispec-acapy = "~3.0.2"
 aiohttp-cors = "~0.7.0"
 apispec = "^6.6.0"
@@ -241,7 +241,7 @@ did-peer-2 = "^0.1.2"
 did-peer-4 = "^0.1.4"
 ecdsa = "~0.19.0"
 jsonpath-ng = "1.6.1"
-Markdown = "~3.7"
+Markdown = "~3.6"
 markupsafe = "2.1.5"
 marshmallow = "~3.21.3"
 nest_asyncio = "~1.6.0"
@@ -263,15 +263,15 @@ unflatten = "~0.1"
 uuid_utils = "^0.9.0"
 
 [package.extras]
-askar = ["anoncreds (==0.2.0)", "aries-askar-ff137 (>=0.3.3b1,<0.4.0)", "indy-credx (>=1.1.1,<1.2.0)", "indy-vdr (>=0.4.0,<0.5.0)"]
+askar = ["anoncreds (==0.2.0)", "aries-askar-ff137 (==0.3.3b0)", "indy-credx (>=1.1.1,<1.2.0)", "indy-vdr (>=0.4.0,<0.5.0)"]
 bbs = ["ursa-bbs-signatures (>=1.0.1,<1.1.0)"]
 didcommv2 = ["didcomm-messaging (>=0.1.1a0,<0.2.0)"]
 
 [package.source]
 type = "git"
-url = "https://github.com/ff137/aries-cloudagent-python.git"
-reference = "feat/pagination-ordering"
-resolved_reference = "63812f472c4b07336a81b4f8f4b3c071739f3c2b"
+url = "https://github.com/didx-xyz/aries-cloudagent-python.git"
+reference = "1.0.0b0"
+resolved_reference = "38ab0031741d89c96edfe2e29357fe14ac8ac8db"
 
 [[package]]
 name = "async-timeout"
@@ -844,13 +844,13 @@ test = ["hypothesis (>=4.43.0)", "mypy (==1.10.0)", "pytest (>=7.0.0)", "pytest-
 
 [[package]]
 name = "fastapi-slim"
-version = "0.112.1"
+version = "0.112.2"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "fastapi_slim-0.112.1-py3-none-any.whl", hash = "sha256:cc227cf9402d0ba54a24f80eb205c33bcb25d3ea18d53fdac3fd76ea5af8e76d"},
-    {file = "fastapi_slim-0.112.1.tar.gz", hash = "sha256:876ebd24e72273986709db2d469b75dc18f04c3ab9140ffd78b29d7785d26687"},
+    {file = "fastapi_slim-0.112.2-py3-none-any.whl", hash = "sha256:c023f74768f187af142c2fe5ff9e4ca3c4c1940bbde7df008cb283532422a23f"},
+    {file = "fastapi_slim-0.112.2.tar.gz", hash = "sha256:75b8eb0c6ee05a20270da7a527ac7ad53b83414602f42b68f7027484dab3aedb"},
 ]
 
 [package.dependencies]
@@ -859,8 +859,8 @@ starlette = ">=0.37.2,<0.39.0"
 typing-extensions = ">=4.8.0"
 
 [package.extras]
-all = ["email_validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "itsdangerous (>=1.1.0)", "jinja2 (>=2.11.2)", "orjson (>=3.2.1)", "pydantic-extra-types (>=2.0.0)", "pydantic-settings (>=2.0.0)", "python-multipart (>=0.0.7)", "pyyaml (>=5.3.1)", "ujson (>=4.0.1,!=4.0.2,!=4.1.0,!=4.2.0,!=4.3.0,!=5.0.0,!=5.1.0)", "uvicorn[standard] (>=0.12.0)"]
-standard = ["email_validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "jinja2 (>=2.11.2)", "python-multipart (>=0.0.7)", "uvicorn[standard] (>=0.12.0)"]
+all = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "itsdangerous (>=1.1.0)", "jinja2 (>=2.11.2)", "orjson (>=3.2.1)", "pydantic-extra-types (>=2.0.0)", "pydantic-settings (>=2.0.0)", "python-multipart (>=0.0.7)", "pyyaml (>=5.3.1)", "ujson (>=4.0.1,!=4.0.2,!=4.1.0,!=4.2.0,!=4.3.0,!=5.0.0,!=5.1.0)", "uvicorn[standard] (>=0.12.0)"]
+standard = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "jinja2 (>=2.11.2)", "python-multipart (>=0.0.7)", "uvicorn[standard] (>=0.12.0)"]
 
 [[package]]
 name = "frozendict"
@@ -1017,13 +1017,13 @@ test = ["eth-utils (>=2.0.0)", "hypothesis (>=3.44.24,<=6.31.6)", "pytest (>=7.0
 
 [[package]]
 name = "idna"
-version = "3.7"
+version = "3.8"
 description = "Internationalized Domain Names in Applications (IDNA)"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.6"
 files = [
-    {file = "idna-3.7-py3-none-any.whl", hash = "sha256:82fee1fc78add43492d3a1898bfa6d8a904cc97d8427f683ed8e798d07761aa0"},
-    {file = "idna-3.7.tar.gz", hash = "sha256:028ff3aadf0609c1fd278d8ea3089299412a7a8b9bd005dd08b9f8285bcb5cfc"},
+    {file = "idna-3.8-py3-none-any.whl", hash = "sha256:050b4e5baadcd44d760cedbd2b8e639f2ff89bbc7a5730fcc662954303377aac"},
+    {file = "idna-3.8.tar.gz", hash = "sha256:d838c2c0ed6fced7693d5e8ab8e734d5f8fda53a039c0164afb0b82e771e3603"},
 ]
 
 [[package]]
@@ -1250,13 +1250,13 @@ source = ["Cython (>=3.0.11)"]
 
 [[package]]
 name = "markdown"
-version = "3.7"
+version = "3.6"
 description = "Python implementation of John Gruber's Markdown."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "Markdown-3.7-py3-none-any.whl", hash = "sha256:7eb6df5690b81a1d7942992c97fad2938e956e79df20cbc6186e9c3a77b1c803"},
-    {file = "markdown-3.7.tar.gz", hash = "sha256:2ae2471477cfd02dbbf038d5d9bc226d40def84b4fe2986e49b59b6b472bbed2"},
+    {file = "Markdown-3.6-py3-none-any.whl", hash = "sha256:48f276f4d8cfb8ce6527c8f79e2ee29708508bf4d40aa410fbc3b4ee832c850f"},
+    {file = "Markdown-3.6.tar.gz", hash = "sha256:ed4f41f6daecbeeb96e576ce414c41d2d876daa9a16cb35fa8ed8c2ddfad0224"},
 ]
 
 [package.extras]
@@ -2417,4 +2417,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "904398c0acf2e32c50c60bf3e30327d9ca114bb83af738f7fe68f55930d6caf0"
+content-hash = "381b1481231df92685f0238b3f8d56c6ecbd89f4f25e6c5cee5ff9c4a3ec83eb"
