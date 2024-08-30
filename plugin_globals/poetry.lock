@@ -279,8 +279,8 @@ didcommv2 = ["didcomm-messaging (>=0.1.1a0,<0.2.0)"]
 [package.source]
 type = "git"
 url = "https://github.com/didx-xyz/aries-cloudagent-python.git"
-reference = "1.0.0b0"
-resolved_reference = "38ab0031741d89c96edfe2e29357fe14ac8ac8db"
+reference = "1.0.0b1"
+resolved_reference = "e36fe134f70b9b38df5b3c937f674ee41b4f0e14"
 
 [[package]]
 name = "async-timeout"
@@ -2628,4 +2628,4 @@ aca-py = ["aries-cloudagent"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "8b31ec5c4c8892d86a5df0b8a6e37080b7b9a90d54a969eab02160217e7ecf27"
+content-hash = "8db742ed2f042e684ad7b67be192b47b2750ecb2bdd190dd47ec2e3dcdea8858"
