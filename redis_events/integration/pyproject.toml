@@ -10,7 +10,7 @@ pytest = "^8.3.2"
 pytest-asyncio = "~0.23.7"
 requests = "^2.31.0"
 aiohttp = "^3.9.5"
-aries-cloudagent = { git = "https://github.com/didx-xyz/aries-cloudagent-python.git", tag = "1.0.0b0" }
+aries-cloudagent = { git = "https://github.com/didx-xyz/aries-cloudagent-python.git", tag = "1.0.0b1" }
 fastapi-slim = "^0.112.0"
 nest-asyncio = "^1.5.5"
 pydantic = "^2.7"
