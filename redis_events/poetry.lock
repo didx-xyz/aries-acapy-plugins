@@ -234,19 +234,18 @@ yaml = ["PyYAML (>=3.10)"]
 
 [[package]]
 name = "aries-askar-ff137"
-version = "0.3.3b0"
-description = "UNKNOWN"
+version = "0.3.3b2"
+description = "Python wrapper for the Aries Askar cryptographic library"
 optional = false
-python-versions = ">=3.6.3"
+python-versions = ">=3.8,<4.0"
 files = [
-    {file = "aries_askar_ff137-0.3.3b0-py3-none-macosx_10_9_universal2.whl", hash = "sha256:32d6ed2366527b733a6025c19fb6f52f4547a3b2693cc11a1175b0ca3bfc8792"},
-    {file = "aries_askar_ff137-0.3.3b0-py3-none-manylinux2014_aarch64.whl", hash = "sha256:54214ac04c3f06d7dc302c0592787f9a998c8e104f8f2ee382fc2645efef6e41"},
-    {file = "aries_askar_ff137-0.3.3b0-py3-none-manylinux2014_x86_64.whl", hash = "sha256:c7f5517c3c910aa34cee9359e184388f320d14bac7296b37d9dca4026c254bba"},
-    {file = "aries_askar_ff137-0.3.3b0-py3-none-win_amd64.whl", hash = "sha256:5bdf83bdaacd4dc43a34a3a58c43e165a0b66303c9bddded64cdf6f84e015ee0"},
+    {file = "aries_askar_ff137-0.3.3b2-py3-none-manylinux2014_aarch64.whl", hash = "sha256:19149ede8d6cab0e003270e55ebb184e01cfa0aa227f35a326c63cc26daeeda1"},
+    {file = "aries_askar_ff137-0.3.3b2-py3-none-win_amd64.whl", hash = "sha256:c535395e1aa8b11c4c4bf76bb822c27c28ee743ab6e9e5487e1c14846d74925f"},
+    {file = "aries_askar_ff137-0.3.3b2.tar.gz", hash = "sha256:cfa26a5dc6e305176211062a16b385ebbf3a5a675b35cae38ba3c2dfc275d65e"},
 ]
 
 [package.dependencies]
-cached-property = ">=1.5.2,<1.6.0"
+cached_property = ">=1.5.2,<1.6.0"
 
 [package.source]
 type = "legacy"
@@ -1110,6 +1109,8 @@ files = [
     {file = "frozendict-2.4.4-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:d13b4310db337f4d2103867c5a05090b22bc4d50ca842093779ef541ea9c9eea"},
     {file = "frozendict-2.4.4-cp39-cp39-win_amd64.whl", hash = "sha256:b3b967d5065872e27b06f785a80c0ed0a45d1f7c9b85223da05358e734d858ca"},
     {file = "frozendict-2.4.4-cp39-cp39-win_arm64.whl", hash = "sha256:4ae8d05c8d0b6134bfb6bfb369d5fa0c4df21eabb5ca7f645af95fdc6689678e"},
+    {file = "frozendict-2.4.4-py311-none-any.whl", hash = "sha256:705efca8d74d3facbb6ace80ab3afdd28eb8a237bfb4063ed89996b024bc443d"},
+    {file = "frozendict-2.4.4-py312-none-any.whl", hash = "sha256:d9647563e76adb05b7cde2172403123380871360a114f546b4ae1704510801e5"},
     {file = "frozendict-2.4.4.tar.gz", hash = "sha256:3f7c031b26e4ee6a3f786ceb5e3abf1181c4ade92dce1f847da26ea2c96008c7"},
 ]
 
@@ -2886,4 +2887,4 @@ aca-py = ["aries-cloudagent"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "93485a268e095b93022e0fcd4c1528891c7772cec9f42fdae87cda0a429d650f"
+content-hash = "e14c486e64f890a8dae682946213b6fa7d40ca76c0f4fa7662236e9543271a13"
