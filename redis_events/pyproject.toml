@@ -13,7 +13,7 @@ aries-cloudagent = { git = "https://github.com/didx-xyz/aries-cloudagent-python.
 aiohttp = "^3.9.5"
 fastapi-slim = "^0.112.0"
 nest-asyncio = "^1.5.5"
-pydantic = "^2.7"
+pydantic = "^2.9"
 redis = "^5.0.8"
 uvicorn = "^0.30.1"
 
