@@ -341,13 +341,13 @@ toml = ["tomli"]
 
 [[package]]
 name = "fastapi-slim"
-version = "0.112.2"
+version = "0.114.2"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "fastapi_slim-0.112.2-py3-none-any.whl", hash = "sha256:c023f74768f187af142c2fe5ff9e4ca3c4c1940bbde7df008cb283532422a23f"},
-    {file = "fastapi_slim-0.112.2.tar.gz", hash = "sha256:75b8eb0c6ee05a20270da7a527ac7ad53b83414602f42b68f7027484dab3aedb"},
+    {file = "fastapi_slim-0.114.2-py3-none-any.whl", hash = "sha256:52ae76c53a30ad0fa96beb84c1bf4bef9c72e88c2f7c0473e836f01d7ac3ca6b"},
+    {file = "fastapi_slim-0.114.2.tar.gz", hash = "sha256:76d0a450826fb0fa740268be55ef04c44807da87a94fbbf5f16338b5a4a2d321"},
 ]
 
 [package.dependencies]
@@ -1049,4 +1049,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "32cae9f15861d8000fe0fb4c1510e4cb5953af0452dacfb78d2a92f04d233309"
+content-hash = "f1ef39bf7a18853af80f5f454d2bc7890fb4af3341c78711cb61fec4bcad8e1e"
