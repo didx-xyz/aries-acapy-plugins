@@ -2,6 +2,7 @@
 
 import base64
 import logging
+import os
 import re
 import time
 from string import Template
@@ -48,8 +49,9 @@ async def nats_setup(profile: Profile, event: Event) -> NATS:
     connection_url = (get_config(profile.settings).connection).connection_url
     LOGGER.info(f"Connecting to NATS url: {connection_url}")
     nats = NATS()
+    NATS_CREDS_FILE = os.getenv("NATS_CREDS_FILE")
     try:
-        await nats.connect(servers=[connection_url])
+        await nats.connect(servers=[connection_url], user_credentials=NATS_CREDS_FILE)
         LOGGER.info("NATS connection established.")
         profile.context.injector.bind_instance(NATS, nats)
     except (ErrConnectionClosed, ErrTimeout, ErrNoServers) as err:
