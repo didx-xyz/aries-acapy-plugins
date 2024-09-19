@@ -171,7 +171,13 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
 
         outbound_payload = orjson.dumps({"payload": payload, "metadata": metadata})
 
-        await js.publish(nats_subject, outbound_payload)
+        # Publish message and handle acknowledgment
+        ack = await js.publish(nats_subject, outbound_payload)
+        if not ack.acknowledged:
+            LOGGER.error(
+                "Failed to publish message to subject %s: %s", nats_subject, ack
+            )
+            # TODO: implement retry logic here
 
         # Deliver/dispatch events to webhook_urls directly
         if config_events.deliver_webhook and webhook_urls:
@@ -197,9 +203,16 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
                         ).decode(),
                         "headers": headers,
                     }
-                    await js.publish(
+                    ack = await js.publish(
                         config_outbound.acapy_outbound_topic,
                         orjson.dumps(outbound_msg),
                     )
+                    if not ack.acknowledged:
+                        LOGGER.error(
+                            "Failed to publish webhook message to subject %s: %s",
+                            config_outbound.acapy_outbound_topic,
+                            ack,
+                        )
+                        # TODO: implement retry logic here
     except (ErrConnectionClosed, ErrTimeout, ErrNoServers, ValueError) as err:
         LOGGER.exception("Failed to process and send webhook, %s", err)
