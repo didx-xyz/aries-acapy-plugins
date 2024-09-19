@@ -55,6 +55,10 @@ async def nats_setup(profile: Profile, event: Event) -> NATS:
         await nats.connect(servers=[connection_url], user_credentials=NATS_CREDS_FILE)
         LOGGER.info("NATS connection established.")
         profile.context.injector.bind_instance(NATS, nats)
+
+        # Create and store JetStream context
+        js = nats.jetstream()
+        profile.context.injector.bind_instance(JetStreamContext, js)
     except (ErrConnectionClosed, ErrTimeout, ErrNoServers) as err:
         LOGGER.error("Caught error in NATS setup: %s", err)
         raise TransportError(f"No NATS instance setup: {err}")
@@ -74,8 +78,8 @@ async def define_stream(js: JetStreamContext, stream_name: str, subjects: list[s
 async def on_startup(profile: Profile, event: Event):
     """Setup NATS on startup."""
     LOGGER.info("Setup NATS on startup")
-    nats = await nats_setup(profile, event)
-    js = nats.jetstream()
+    await nats_setup(profile, event)
+    js = profile.inject(JetStreamContext)
     config_events = get_config(profile.settings).event or EventConfig.default()
     for pattern, template in config_events.event_topic_maps.items():
         subjects = [template.replace("$wallet_id", "*")]
@@ -128,7 +132,7 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
     if not nats:
         nats = await nats_setup(profile, event)
 
-    js = nats.jetstream()
+    js = profile.inject(JetStreamContext)
 
     LOGGER.debug("Handling event: %s", event)
     wallet_id = cast(Optional[str], profile.settings.get("wallet.id"))
