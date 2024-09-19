@@ -133,8 +133,8 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
     }
     webhook_urls = profile.settings.get("admin.webhook_urls")
     try:
-        nats_topic = Template(template).substitute(**payload)
-        LOGGER.debug(f"Sending message {payload} with topic {nats_topic}")
+        nats_subject = Template(template).substitute(**payload)
+        LOGGER.debug(f"Sending message {payload} with NATS subject {nats_subject}")
 
         origin = profile.settings.get("default_label")
         group_id = profile.settings.get("wallet.group_id")
@@ -148,7 +148,7 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
         metadata.update(metadata_origin)
 
         outbound = orjson.dumps({"payload": payload, "metadata": metadata})
-        await nats.publish(nats_topic, outbound)
+        await nats.publish(nats_subject, outbound)
 
         # Deliver/dispatch events to webhook_urls directly
         if config_events.deliver_webhook and webhook_urls:
