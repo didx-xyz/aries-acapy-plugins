@@ -8,21 +8,21 @@ from pydantic import BaseModel
 LOGGER = logging.getLogger(__name__)
 
 EVENT_TOPIC_MAP = {
-    "^acapy::webhook::(.*)$": "acapy-webhook-$wallet_id",
-    "^acapy::record::([^:]*)::([^:]*)$": "acapy-record-with-state-$wallet_id",
-    "^acapy::record::([^:])?": "acapy-record-$wallet_id",
-    "acapy::basicmessage::received": "acapy-basicmessage-received",
-    "acapy::problem_report": "acapy-problem_report",
-    "acapy::ping::received": "acapy-ping-received",
-    "acapy::ping::response_received": "acapy-ping-response_received",
-    "acapy::actionmenu::received": "acapy-actionmenu-received",
-    "acapy::actionmenu::get-active-menu": "acapy-actionmenu-get-active-menu",
-    "acapy::actionmenu::perform-menu-action": "acapy-actionmenu-perform-menu-action",
-    "acapy::keylist::updated": "acapy-keylist-updated",
-    "acapy::revocation-notification::received": "acapy-revocation-notification-received",
-    "acapy::revocation-notification-v2::received": "acapy-revocation-notification-v2-received",  # noqa: E501
-    "acapy::forward::received": "acapy-forward-received",
-    "acapy::outbound-message::queued_for_delivery": "acapy-outbound-message-queued-for-delivery",  # noqa: E501
+    "^acapy::webhook::(.*)$": "acapy.webhook.$wallet_id",
+    "^acapy::record::([^:]*)::([^:]*)$": "acapy.record-with-state.$wallet_id",
+    "^acapy::record::([^:])?": "acapy.record.$wallet_id",
+    "acapy::basicmessage::received": "acapy.basicmessage.received",
+    "acapy::problem_report": "acapy.problem_report",
+    "acapy::ping::received": "acapy.ping.received",
+    "acapy::ping::response_received": "acapy.ping.response_received",
+    "acapy::actionmenu::received": "acapy.actionmenu.received",
+    "acapy::actionmenu::get-active-menu": "acapy.actionmenu.get-active-menu",
+    "acapy::actionmenu::perform-menu-action": "acapy.actionmenu.perform-menu-action",
+    "acapy::keylist::updated": "acapy.keylist.updated",
+    "acapy::revocation-notification::received": "acapy.revocation-notification.received",
+    "acapy::revocation-notification-v2::received": "acapy.revocation-notification-v2.received",  # noqa: E501
+    "acapy::forward::received": "acapy.forward.received",
+    "acapy::outbound-message::queued_for_delivery": "acapy.outbound-message.queued-for-delivery",  # noqa: E501
 }
 
 EVENT_WEBHOOK_TOPIC_MAP = {
