@@ -32,7 +32,7 @@ async def setup(context: InjectionContext):
         raise ValueError("EventBus missing in context")
 
     for event in config.event_topic_maps.keys():
-        LOGGER.info(f"subscribing to event: {event}")
+        LOGGER.info("subscribing to event: %s", event)
         bus.subscribe(re.compile(event), handle_event)
 
     bus.subscribe(STARTUP_EVENT_PATTERN, on_startup)
@@ -47,7 +47,7 @@ WEBHOOK_RE = re.compile(r"acapy::webhook::{.*}")
 async def nats_setup(profile: Profile, event: Event) -> NATS:
     """Connect, setup and return the NATS instance."""
     connection_url = (get_config(profile.settings).connection).connection_url
-    LOGGER.info(f"Connecting to NATS url: {connection_url}")
+    LOGGER.info("Connecting to NATS url: %s", connection_url)
     nats = NATS()
     NATS_CREDS_FILE = os.getenv("NATS_CREDS_FILE")
     try:
@@ -55,8 +55,8 @@ async def nats_setup(profile: Profile, event: Event) -> NATS:
         LOGGER.info("NATS connection established.")
         profile.context.injector.bind_instance(NATS, nats)
     except (ErrConnectionClosed, ErrTimeout, ErrNoServers) as err:
-        LOGGER.error(f"Caught error in NATS setup: {err}")
-        raise TransportError(f"No NATS instance setup, {err}")
+        LOGGER.error("Caught error in NATS setup: %s", err)
+        raise TransportError(f"No NATS instance setup: {err}")
     return nats
 
 
@@ -101,7 +101,7 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
     template = config_events.event_topic_maps.get(pattern)
 
     if not template:
-        LOGGER.warning(f"Could not infer template from pattern: {pattern}")
+        LOGGER.warning("Could not infer template from pattern: %s", pattern)
         return
 
     if "-with-state" not in template:
@@ -134,7 +134,7 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
     webhook_urls = profile.settings.get("admin.webhook_urls")
     try:
         nats_subject = Template(template).substitute(**payload)
-        LOGGER.debug(f"Sending message {payload} with NATS subject {nats_subject}")
+        LOGGER.debug("Sending message %s with NATS subject %s", payload, nats_subject)
 
         origin = profile.settings.get("default_label")
         group_id = profile.settings.get("wallet.group_id")
@@ -179,4 +179,4 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
                         orjson.dumps(outbound_msg),
                     )
     except (ErrConnectionClosed, ErrTimeout, ErrNoServers, ValueError) as err:
-        LOGGER.exception(f"Failed to process and send webhook, {err}")
+        LOGGER.exception("Failed to process and send webhook, %s", err)
