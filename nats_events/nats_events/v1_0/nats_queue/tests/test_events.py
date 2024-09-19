@@ -93,10 +93,8 @@ class TestNATSEvents(IsolatedAsyncioTestCase):
 
     async def test_on_startup(self):
         test_event = Event("test_topic", {"rev_reg_id": "mock", "crids": ["mock"]})
-        with patch.object(
-            NATS,
-            "connect",
-            AsyncMock(return_value=MagicMock(ping=AsyncMock())),
+        with patch.object(NATS, "connect", AsyncMock()), patch.object(
+            NATS, "jetstream", return_value=MagicMock(add_stream=AsyncMock())
         ):
             await on_startup(self.profile, test_event)
 
@@ -255,7 +253,7 @@ class TestNATSEvents(IsolatedAsyncioTestCase):
         )
         with patch.object(
             test_module,
-            "nats_setup",
+            "nats_jetstream_setup",
             AsyncMock(
                 return_value=MagicMock(
                     publish=AsyncMock(side_effect=ErrNoServers),
