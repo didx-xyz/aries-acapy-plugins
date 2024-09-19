@@ -45,7 +45,7 @@ RECORD_RE = re.compile(r"acapy::record::([^:]*)(?:::(.*))?")
 WEBHOOK_RE = re.compile(r"acapy::webhook::{.*}")
 
 
-async def nats_setup(profile: Profile, event: Event) -> NATS:
+async def nats_jetstream_setup(profile: Profile, event: Event) -> JetStreamContext:
     """Connect, setup and return the NATS instance."""
     connection_url = (get_config(profile.settings).connection).connection_url
     LOGGER.info("Connecting to NATS url: %s", connection_url)
@@ -62,7 +62,7 @@ async def nats_setup(profile: Profile, event: Event) -> NATS:
     except (ErrConnectionClosed, ErrTimeout, ErrNoServers) as err:
         LOGGER.error("Caught error in NATS setup: %s", err)
         raise TransportError(f"No NATS instance setup: {err}")
-    return nats
+    return js
 
 
 async def define_stream(js: JetStreamContext, stream_name: str, subjects: list[str]):
@@ -77,14 +77,13 @@ async def define_stream(js: JetStreamContext, stream_name: str, subjects: list[s
 
 async def on_startup(profile: Profile, event: Event):
     """Setup NATS on startup."""
-    LOGGER.info("Setup NATS on startup")
-    await nats_setup(profile, event)
-    js = profile.inject(JetStreamContext)
+    LOGGER.info("Setup NATS JetStream on startup")
+    js = await nats_jetstream_setup(profile, event)
     config_events = get_config(profile.settings).event or EventConfig.default()
     for pattern, template in config_events.event_topic_maps.items():
         subjects = [template.replace("$wallet_id", "*")]
         await define_stream(js, pattern, subjects)
-    LOGGER.info("Successfully setup NATS.")
+    LOGGER.info("Successfully setup NATS JetStream.")
 
 
 async def on_shutdown(profile: Profile, event: Event):
@@ -128,11 +127,10 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
         # We are only interested in state change webhooks. This avoids duplicate events
         return
 
-    nats = profile.inject_or(NATS)
-    if not nats:
-        nats = await nats_setup(profile, event)
-
-    js = profile.inject(JetStreamContext)
+    js = profile.inject_or(JetStreamContext)
+    if not js:
+        LOGGER.warning("JetStream context not available. Setting up JetStream again")
+        js = await nats_jetstream_setup(profile, event)
 
     LOGGER.debug("Handling event: %s", event)
     wallet_id: Optional[str] = profile.settings.get("wallet.id")
