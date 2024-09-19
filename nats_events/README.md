@@ -17,6 +17,6 @@ Please note that this plugin is still in the early stages of development. The fo
 
 ## Features
 
-- **Event Handling**: Push events to NATS topics.
+- **Event Handling**: Push events to NATS subjects.
 - **Dynamic Topic Mapping**: Map event patterns to NATS subjects (analogous to topics in other systems systems like Kafka) using templates.
 - **Metadata Enrichment**: Add metadata to events before publishing.
