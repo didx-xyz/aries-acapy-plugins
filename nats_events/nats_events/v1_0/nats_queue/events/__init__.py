@@ -16,6 +16,7 @@ from aries_cloudagent.core.util import SHUTDOWN_EVENT_PATTERN, STARTUP_EVENT_PAT
 from aries_cloudagent.transport.error import TransportError
 from nats.aio.client import Client as NATS
 from nats.aio.errors import ErrConnectionClosed, ErrNoServers, ErrTimeout
+from nats.js import JetStreamContext
 
 from ..config import EventConfig, OutboundConfig, get_config
 
@@ -60,10 +61,25 @@ async def nats_setup(profile: Profile, event: Event) -> NATS:
     return nats
 
 
+async def define_stream(js: JetStreamContext, stream_name: str, subjects: list[str]):
+    """Define a JetStream stream."""
+    try:
+        await js.add_stream(name=stream_name, subjects=subjects)
+        LOGGER.info("Stream %s defined with subjects %s", stream_name, subjects)
+    except Exception as err:
+        LOGGER.error("Error defining stream %s: %s", stream_name, err)
+        raise TransportError(f"Error defining stream {stream_name}: {err}")
+
+
 async def on_startup(profile: Profile, event: Event):
     """Setup NATS on startup."""
     LOGGER.info("Setup NATS on startup")
-    await nats_setup(profile, event)
+    nats = await nats_setup(profile, event)
+    js = nats.jetstream()
+    config_events = get_config(profile.settings).event or EventConfig.default()
+    for pattern, template in config_events.event_topic_maps.items():
+        subjects = [template.replace("$wallet_id", "*")]
+        await define_stream(js, pattern, subjects)
     LOGGER.info("Successfully setup NATS.")
 
 
@@ -112,6 +128,8 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
     if not nats:
         nats = await nats_setup(profile, event)
 
+    js = nats.jetstream()
+
     LOGGER.debug("Handling event: %s", event)
     wallet_id = cast(Optional[str], profile.settings.get("wallet.id"))
     try:
@@ -147,8 +165,9 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
         metadata.update(metadata_group_id)
         metadata.update(metadata_origin)
 
-        outbound = orjson.dumps({"payload": payload, "metadata": metadata})
-        await nats.publish(nats_subject, outbound)
+        outbound_payload = orjson.dumps({"payload": payload, "metadata": metadata})
+
+        await js.publish(nats_subject, outbound_payload)
 
         # Deliver/dispatch events to webhook_urls directly
         if config_events.deliver_webhook and webhook_urls:
@@ -174,7 +193,7 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
                         ).decode(),
                         "headers": headers,
                     }
-                    await nats.publish(
+                    await js.publish(
                         config_outbound.acapy_outbound_topic,
                         orjson.dumps(outbound_msg),
                     )
