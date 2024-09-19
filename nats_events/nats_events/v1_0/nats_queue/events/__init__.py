@@ -6,7 +6,7 @@ import os
 import re
 import time
 from string import Template
-from typing import Any, Optional, cast
+from typing import Any, Optional
 
 import orjson
 from aries_cloudagent.config.injection_context import InjectionContext
@@ -135,7 +135,7 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
     js = profile.inject(JetStreamContext)
 
     LOGGER.debug("Handling event: %s", event)
-    wallet_id = cast(Optional[str], profile.settings.get("wallet.id"))
+    wallet_id: Optional[str] = profile.settings.get("wallet.id")
     try:
         event_payload = process_event_payload(event.payload)
     except TypeError:
