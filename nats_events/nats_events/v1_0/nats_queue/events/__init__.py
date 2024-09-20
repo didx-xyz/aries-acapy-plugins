@@ -124,6 +124,7 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
         return
 
     if "-with-state" not in template:
+        LOGGER.warning("!!! FYI !!! Ignoring `-with-state` record: %s", event)
         # We are only interested in state change webhooks. This avoids duplicate events
         return
 
@@ -137,12 +138,15 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
     try:
         event_payload = process_event_payload(event.payload)
     except TypeError:
+        LOGGER.warning("!!! FYI !!! Encountered TypeError")
         try:
             event_payload = event.payload.serialize()
         except AttributeError:
+            LOGGER.warning("!!! FYI !!! Encountered AttributeError")
             try:
                 event_payload = process_event_payload(event.payload.payload)
             except TypeError:
+                LOGGER.warning("!!! FYI !!! Encountered TypeError2")
                 event_payload = process_event_payload(event.payload.enc_payload)
     payload = {
         "wallet_id": wallet_id or "base",
@@ -175,8 +179,11 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
                 "Failed to publish message to subject %s: %s", nats_subject, ack
             )
             # TODO: implement retry logic here
+        else:
+            LOGGER.info("Published %s to %s", outbound_payload, nats_subject)
 
         # Deliver/dispatch events to webhook_urls directly
+        webhook_urls = profile.settings.get("admin.webhook_urls")
         if config_events.deliver_webhook and webhook_urls:
             config_outbound = (
                 get_config(profile.settings).outbound or OutboundConfig.default()
