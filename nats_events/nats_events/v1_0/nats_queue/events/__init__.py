@@ -22,6 +22,8 @@ from ..config import EventConfig, OutboundConfig, get_config
 
 LOGGER = logging.getLogger(__name__)
 
+NATS_CREDS_FILE = os.getenv("NATS_CREDS_FILE")
+
 
 async def setup(context: InjectionContext):
     """Setup the plugin."""
@@ -50,9 +52,14 @@ async def nats_jetstream_setup(profile: Profile, event: Event) -> JetStreamConte
     connection_url = (get_config(profile.settings).connection).connection_url
     LOGGER.info("Connecting to NATS url: %s", connection_url)
     nats = NATS()
-    NATS_CREDS_FILE = os.getenv("NATS_CREDS_FILE")
+    connect_kwargs = {
+        "servers": [connection_url],
+    }
+    if NATS_CREDS_FILE:
+        connect_kwargs["user_credentials"] = NATS_CREDS_FILE
+
     try:
-        await nats.connect(servers=[connection_url], user_credentials=NATS_CREDS_FILE)
+        await nats.connect(**connect_kwargs)
         LOGGER.info("NATS connection established.")
         profile.context.injector.bind_instance(NATS, nats)
 
