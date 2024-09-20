@@ -64,7 +64,7 @@ async def nats_jetstream_setup(profile: Profile, event: Event) -> JetStreamConte
         profile.context.injector.bind_instance(NATS, nats)
 
         # Create and store JetStream context
-        js = nats.jetstream()
+        js = nats.jetstream(timeout=10)
         profile.context.injector.bind_instance(JetStreamContext, js)
     except (ErrConnectionClosed, ErrTimeout, ErrNoServers) as err:
         LOGGER.error("Caught error in NATS setup: %s", err)
@@ -75,8 +75,12 @@ async def nats_jetstream_setup(profile: Profile, event: Event) -> JetStreamConte
 async def define_stream(js: JetStreamContext, stream_name: str, subjects: list[str]):
     """Define a JetStream stream."""
     try:
+        LOGGER.info("Defining %s with subjects %s", stream_name, subjects)
         await js.add_stream(name=stream_name, subjects=subjects)
         LOGGER.info("Stream %s defined with subjects %s", stream_name, subjects)
+    except ErrTimeout as err:
+        LOGGER.error("Timeout error defining stream %s: %s", stream_name, err)
+        raise TransportError(f"Timeout error defining stream {stream_name}: {err}")
     except Exception as err:
         LOGGER.error("Error defining stream %s: %s", stream_name, err)
         raise TransportError(f"Error defining stream {stream_name}: {err}")
@@ -87,9 +91,10 @@ async def on_startup(profile: Profile, event: Event):
     LOGGER.info("Setup NATS JetStream on startup")
     js = await nats_jetstream_setup(profile, event)
     config_events = get_config(profile.settings).event or EventConfig.default()
-    for pattern, template in config_events.event_topic_maps.items():
+    for _, template in config_events.event_topic_maps.items():
         subjects = [template.replace("$wallet_id", "*")]
-        await define_stream(js, pattern, subjects)
+        name = template.replace(".$wallet_id", "")
+        await define_stream(js, name, subjects)
     LOGGER.info("Successfully setup NATS JetStream.")
 
 
