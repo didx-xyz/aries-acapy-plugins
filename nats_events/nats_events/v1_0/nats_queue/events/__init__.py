@@ -173,7 +173,7 @@ async def publish_with_retry(
                 LOGGER.warning("Duplicate message detected for subject %s", subject)
             else:
                 LOGGER.info(
-                    "Published message to subject %s with sequence %d", subject, ack.seq
+                    "Published message to subject %s with payload %d", subject, payload
                 )
                 return
         except (ErrConnectionClosed, ErrTimeout, ErrNoServers) as err:
@@ -202,11 +202,6 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
 
     if not template:
         LOGGER.warning("Could not infer template from pattern: %s", pattern)
-        return
-
-    if "-with-state" not in template:
-        LOGGER.warning("!!! FYI !!! Ignoring `-with-state` record: %s", event)
-        # We are only interested in state change webhooks. This avoids duplicate events
         return
 
     js = profile.inject_or(JetStreamContext)
