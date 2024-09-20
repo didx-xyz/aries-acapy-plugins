@@ -1,5 +1,6 @@
 """ACA-Py Events to NATS."""
 
+import asyncio
 import base64
 import logging
 import os
@@ -86,10 +87,45 @@ async def define_stream(js: JetStreamContext, stream_name: str, subjects: list[s
         raise TransportError(f"Error defining stream {stream_name}: {err}")
 
 
-async def on_startup(profile: Profile, event: Event):
+async def on_startup(profile: Profile, event: Event, retries: int = 5, delay: int = 5):
     """Setup NATS on startup."""
     LOGGER.info("Setup NATS JetStream on startup")
     js = await nats_jetstream_setup(profile, event)
+
+    # Check JetStream context with retries
+    attempt = 0
+    while attempt < retries:
+        try:
+            account_info = await asyncio.wait_for(js.account_info(), timeout=60)
+            is_working = account_info.streams > 0
+            LOGGER.info("JetStream account info: %s", account_info)
+            if is_working:
+                LOGGER.info(
+                    "JetStream is working with %d streams", account_info.streams
+                )
+                break
+            else:
+                LOGGER.warning("JetStream is not working properly, no streams found")
+        except asyncio.TimeoutError:
+            LOGGER.error(
+                "Attempt %d: Timeout while checking JetStream account info", attempt + 1
+            )
+        except Exception as err:
+            LOGGER.error(
+                "Attempt %d: Error checking JetStream account info: %s",
+                attempt + 1,
+                err,
+            )
+
+        attempt += 1
+        if attempt < retries:
+            LOGGER.info("Retrying in %d seconds...", delay)
+            await asyncio.sleep(delay)
+        else:
+            raise TransportError(
+                "Failed to verify JetStream account info after multiple attempts"
+            )
+
     config_events = get_config(profile.settings).event or EventConfig.default()
     for _, template in config_events.event_topic_maps.items():
         subjects = [template.replace("$wallet_id", "*")]
