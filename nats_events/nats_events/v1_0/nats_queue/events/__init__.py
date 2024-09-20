@@ -161,6 +161,39 @@ def process_event_payload(event_payload: Any):
     return processed_event_payload
 
 
+async def publish_with_retry(
+    js: JetStreamContext, subject: str, payload: bytes, retries: int = 3, delay: int = 5
+):
+    """Publish a message with retry logic."""
+    attempt = 0
+    while attempt < retries:
+        try:
+            ack = await js.publish(subject, payload)
+            if ack.duplicate:
+                LOGGER.warning("Duplicate message detected for subject %s", subject)
+            else:
+                LOGGER.info(
+                    "Published message to subject %s with sequence %d", subject, ack.seq
+                )
+                return
+        except (ErrConnectionClosed, ErrTimeout, ErrNoServers) as err:
+            LOGGER.error(
+                "Attempt %d: Failed to publish message to subject %s: %s",
+                attempt + 1,
+                subject,
+                err,
+            )
+
+        attempt += 1
+        if attempt < retries:
+            LOGGER.info("Retrying in %d seconds...", delay)
+            await asyncio.sleep(delay)
+        else:
+            raise TransportError(
+                f"Failed to publish message to subject {subject} after {retries} attempts"
+            )
+
+
 async def handle_event(profile: Profile, event: EventWithMetadata):
     """Push events from aca-py events."""
     config_events = get_config(profile.settings).event or EventConfig.default()
@@ -220,15 +253,8 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
 
         outbound_payload = orjson.dumps({"payload": payload, "metadata": metadata})
 
-        # Publish message and handle acknowledgment
-        ack = await js.publish(nats_subject, outbound_payload)
-        if not ack.acknowledged:
-            LOGGER.error(
-                "Failed to publish message to subject %s: %s", nats_subject, ack
-            )
-            # TODO: implement retry logic here
-        else:
-            LOGGER.info("Published %s to %s", outbound_payload, nats_subject)
+        # Publish message with retry logic
+        await publish_with_retry(js, nats_subject, outbound_payload)
 
         # Deliver/dispatch events to webhook_urls directly
         webhook_urls = profile.settings.get("admin.webhook_urls")
@@ -255,16 +281,10 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
                         ).decode(),
                         "headers": headers,
                     }
-                    ack = await js.publish(
+                    await publish_with_retry(
+                        js,
                         config_outbound.acapy_outbound_topic,
                         orjson.dumps(outbound_msg),
                     )
-                    if not ack.acknowledged:
-                        LOGGER.error(
-                            "Failed to publish webhook message to subject %s: %s",
-                            config_outbound.acapy_outbound_topic,
-                            ack,
-                        )
-                        # TODO: implement retry logic here
     except (ErrConnectionClosed, ErrTimeout, ErrNoServers, ValueError) as err:
         LOGGER.exception("Failed to process and send webhook, %s", err)
