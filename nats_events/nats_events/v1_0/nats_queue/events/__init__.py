@@ -151,7 +151,6 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
         "category": _derive_category(event.topic),
         "payload": event_payload,
     }
-    webhook_urls = profile.settings.get("admin.webhook_urls")
     try:
         nats_subject = Template(template).substitute(**payload)
         LOGGER.debug("Sending message %s with NATS subject %s", payload, nats_subject)
