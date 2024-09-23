@@ -183,7 +183,7 @@ async def publish_with_retry(
                 )
                 return
         except (ErrConnectionClosed, ErrTimeout, ErrNoServers) as err:
-            LOGGER.error(
+            LOGGER.warning(
                 "Attempt %d: Failed to publish message to subject %s: %s",
                 attempt + 1,
                 subject,
@@ -195,7 +195,7 @@ async def publish_with_retry(
             LOGGER.info("Retrying in %d seconds...", delay)
             await asyncio.sleep(delay)
         else:
-            raise TransportError(
+            LOGGER.error(
                 f"Failed to publish message to subject {subject} after {retries} attempts"
             )
 
