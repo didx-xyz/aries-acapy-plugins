@@ -14,14 +14,7 @@ from nats.aio.errors import ErrNoServers
 from nats.js import JetStreamContext
 
 from .. import events as test_module
-from ..events import (
-    handle_event,
-    on_shutdown,
-    on_startup,
-    process_event_payload,
-    publish_with_retry,
-    setup,
-)
+from ..events import handle_event, on_shutdown, on_startup, process_event_payload, setup
 
 SETTINGS = {
     "plugin_config": {
@@ -101,18 +94,14 @@ class TestNATSEvents(IsolatedAsyncioTestCase):
 
     @patch("nats.aio.client.Client.connect", new_callable=AsyncMock)
     @patch("nats.aio.client.Client.jetstream", new_callable=MagicMock)
-    @patch(
-        "nats_events.v1_0.nats_queue.events.nats_jetstream_setup",
-        new_callable=AsyncMock,
-    )
-    async def test_on_startup(self, mock_nats_jetstream_setup, mock_jetstream, _):
+    async def test_on_startup(self, mock_jetstream, mock_connect):
         mock_jetstream.return_value.account_info = AsyncMock(
             return_value=MagicMock(streams=1)
         )
         mock_jetstream.return_value.add_stream = AsyncMock()
-        mock_nats_jetstream_setup.return_value = mock_jetstream.return_value
         test_event = Event("test_topic", {"rev_reg_id": "mock", "crids": ["mock"]})
         await on_startup(self.profile, test_event)
+        mock_connect.assert_awaited_once()
 
     async def test_on_startup_x(self):
         test_event = Event("test_topic", {"rev_reg_id": "mock", "crids": ["mock"]})
@@ -260,21 +249,12 @@ class TestNATSEvents(IsolatedAsyncioTestCase):
         )
         await handle_event(self.profile, test_event_with_metadata)
 
-    @patch(
-        "nats_events.v1_0.nats_queue.events.publish_with_retry", new_callable=AsyncMock
-    )
-    async def test_handle_event_x(self, mock_publish_with_retry):
+    async def test_handle_event_x(self):
         self.profile = InMemoryProfile.test_profile(
             {
                 "plugin_config": SETTINGS["plugin_config"],
                 "emit_new_didcomm_mime_type": False,
             }
-        )
-        # Set the side_effect to a lambda that calls the original function with a short delay
-        mock_publish_with_retry.side_effect = (
-            lambda js, subject, payload, retries, delay: publish_with_retry(
-                js, subject, payload, retries, 0.01
-            )
         )
         with patch.object(
             test_module,
