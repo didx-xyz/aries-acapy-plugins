@@ -15,6 +15,7 @@ from aries_cloudagent.core.event_bus import Event, EventBus, EventWithMetadata
 from aries_cloudagent.core.profile import Profile
 from aries_cloudagent.core.util import SHUTDOWN_EVENT_PATTERN, STARTUP_EVENT_PATTERN
 from aries_cloudagent.transport.error import TransportError
+from aries_cloudagent.transport.outbound.message import OutboundMessage
 from nats.aio.client import Client as NATS
 from nats.aio.errors import ErrConnectionClosed, ErrNoServers, ErrTimeout
 from nats.js import JetStreamContext
@@ -199,6 +200,19 @@ async def publish_with_retry(
             )
 
 
+def process_outbound_message_payload(payload: OutboundMessage):
+    """Handle OutboundMessage types, to make them JSON serializable."""
+    payload_ = payload.__dict__.copy()
+    payload_["target"] = payload_["target"].__dict__.copy()
+    payload_["target_list"] = [
+        target.__dict__.copy() for target in payload_["target_list"]
+    ]
+    if isinstance(payload_["enc_payload"], bytes):
+        payload_["enc_payload"] = payload_["enc_payload"].decode()
+
+    return payload_
+
+
 async def handle_event(profile: Profile, event: EventWithMetadata):
     """Push events from aca-py events."""
     config_events = get_config(profile.settings).event or EventConfig.default()
@@ -209,6 +223,11 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
         LOGGER.warning("Could not infer template from pattern: %s", pattern)
         return
 
+    if "outbound-message" in template and isinstance(event.payload, OutboundMessage):
+        event_payload_to_process = process_outbound_message_payload(event.payload)
+    else:
+        event_payload_to_process = event.payload
+
     js = profile.inject_or(JetStreamContext)
     if not js:
         LOGGER.warning("JetStream context not available. Setting up JetStream again")
@@ -217,18 +236,20 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
     LOGGER.info("Handling event: %s", event)
     wallet_id: Optional[str] = profile.settings.get("wallet.id")
     try:
-        event_payload = process_event_payload(event.payload)
+        event_payload = process_event_payload(event_payload_to_process)
     except TypeError:
         LOGGER.warning("!!! FYI !!! Encountered TypeError")
         try:
-            event_payload = event.payload.serialize()
+            event_payload = event_payload_to_process.serialize()
         except AttributeError:
             LOGGER.warning("!!! FYI !!! Encountered AttributeError")
             try:
-                event_payload = process_event_payload(event.payload.payload)
+                event_payload = process_event_payload(event_payload_to_process.payload)
             except TypeError:
                 LOGGER.warning("!!! FYI !!! Encountered TypeError2")
-                event_payload = process_event_payload(event.payload.enc_payload)
+                event_payload = process_event_payload(
+                    event_payload_to_process.enc_payload
+                )
     payload = {
         "wallet_id": wallet_id or "base",
         "state": event_payload.get("state"),
