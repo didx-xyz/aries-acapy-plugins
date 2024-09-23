@@ -11,6 +11,7 @@ from typing import Any, Optional
 
 import orjson
 from aries_cloudagent.config.injection_context import InjectionContext
+from aries_cloudagent.connections.models.connection_target import ConnectionTarget
 from aries_cloudagent.core.event_bus import Event, EventBus, EventWithMetadata
 from aries_cloudagent.core.profile import Profile
 from aries_cloudagent.core.util import SHUTDOWN_EVENT_PATTERN, STARTUP_EVENT_PATTERN
@@ -203,10 +204,17 @@ async def publish_with_retry(
 def process_outbound_message_payload(payload: OutboundMessage):
     """Handle OutboundMessage types, to make them JSON serializable."""
     payload_ = payload.__dict__.copy()
-    payload_["target"] = payload_["target"].__dict__.copy()
-    payload_["target_list"] = [
-        target.__dict__.copy() for target in payload_["target_list"]
-    ]
+
+    if isinstance(payload_["target"], ConnectionTarget):
+        payload_["target"] = payload_["target"].__dict__.copy()
+
+    if payload_["target_list"] and isinstance(
+        payload_["target_list"][0], ConnectionTarget
+    ):
+        payload_["target_list"] = [
+            target.__dict__.copy() for target in payload_["target_list"]
+        ]
+
     if isinstance(payload_["enc_payload"], bytes):
         payload_["enc_payload"] = payload_["enc_payload"].decode()
 
