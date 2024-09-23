@@ -173,7 +173,7 @@ async def publish_with_retry(
                 LOGGER.warning("Duplicate message detected for subject %s", subject)
             else:
                 LOGGER.info(
-                    "Published message to subject %s with payload %d", subject, payload
+                    "Published message to subject %s with payload %s", subject, payload
                 )
                 return
         except (ErrConnectionClosed, ErrTimeout, ErrNoServers) as err:
