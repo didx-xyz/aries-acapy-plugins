@@ -157,7 +157,12 @@ def process_event_payload(event_payload: Any):
     if isinstance(event_payload, dict):
         processed_event_payload = event_payload
     else:
-        processed_event_payload = orjson.loads(event_payload)
+        try:
+            processed_event_payload = orjson.loads(event_payload)
+        except orjson.JSONDecodeError as err:
+            LOGGER.error("Failed to decode event payload: %s", err)
+            LOGGER.error("Payload: %s", event_payload)
+            raise
     return processed_event_payload
 
 
@@ -209,7 +214,7 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
         LOGGER.warning("JetStream context not available. Setting up JetStream again")
         js = await nats_jetstream_setup(profile, event)
 
-    LOGGER.debug("Handling event: %s", event)
+    LOGGER.info("Handling event: %s", event)
     wallet_id: Optional[str] = profile.settings.get("wallet.id")
     try:
         event_payload = process_event_payload(event.payload)
@@ -233,7 +238,7 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
     }
     try:
         nats_subject = Template(template).substitute(**payload)
-        LOGGER.debug("Sending message %s with NATS subject %s", payload, nats_subject)
+        LOGGER.info("Sending message %s with NATS subject %s", payload, nats_subject)
 
         origin = profile.settings.get("default_label")
         group_id = profile.settings.get("wallet.group_id")
