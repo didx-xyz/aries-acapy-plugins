@@ -128,11 +128,13 @@ async def on_startup(profile: Profile, event: Event, retries: int = 5, delay: in
                 "Failed to verify JetStream account info after multiple attempts"
             )
 
+    # Collect all subjects for the "acapy_events" stream, and define stream
     # config_events = get_config(profile.settings).event or EventConfig.default()
-    # for _, template in config_events.event_topic_maps.items():
-    #     subjects = [template.replace("$wallet_id", "*")]
-    #     name = template.replace(".$wallet_id", "").replace(".", "_")
-    #     await define_stream(js, name, subjects)
+    # subjects = [
+    #     template.replace("$wallet_id", "*")
+    #     for template in config_events.event_topic_maps.values()
+    # ]
+    # await define_stream(js, "acapy_events", subjects)
     LOGGER.info("Successfully setup NATS JetStream.")
 
 
