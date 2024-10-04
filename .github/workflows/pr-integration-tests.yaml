@@ -43,7 +43,7 @@ jobs:
           declare -a changed_dirs=()
           for dir in ./*/; do
             current_folder=$(basename "$dir")
-            if [[ $current_folder == "plugin_globals" ]]; then
+            if [[ $current_folder == "plugin_globals" || [[ $current_folder == "nats_events" ]]; then
               continue
             fi
             for changed_file in ${{ steps.changed-files.outputs.all_changed_files }}; do
