@@ -844,13 +844,13 @@ test = ["hypothesis (>=4.43.0)", "mypy (==1.10.0)", "pytest (>=7.0.0)", "pytest-
 
 [[package]]
 name = "fastapi-slim"
-version = "0.112.4"
+version = "0.115.0"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "fastapi_slim-0.112.4-py3-none-any.whl", hash = "sha256:5f3cdcb4e9be4945fcfd750397a2a76327744ea7a191df0d88a7a88771a616f3"},
-    {file = "fastapi_slim-0.112.4.tar.gz", hash = "sha256:c416e95810985884b8d0e1e7219c7a83cb6a2149ff57f563d1f7aa6ada2aac76"},
+    {file = "fastapi_slim-0.115.0-py3-none-any.whl", hash = "sha256:27ab44da95b622e68be7a19f06df1960a320b9d94e689b0adfc055bb26ee9be7"},
+    {file = "fastapi_slim-0.115.0.tar.gz", hash = "sha256:b4b962ca2aa0a31010dafdad3d4da99d368a5591223304c6fb385712fad7feb6"},
 ]
 
 [package.dependencies]
@@ -2427,4 +2427,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "0dcbeab6df1a7c71e7d6f26b8f3e5ddf3493c5120c300840c5891d7ea7de2b8f"
+content-hash = "be90efcd4525e97e6ff240d54d06ae54436089dc24f2afa84b27ce7291229cc8"
