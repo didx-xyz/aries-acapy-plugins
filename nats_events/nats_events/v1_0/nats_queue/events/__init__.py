@@ -181,7 +181,7 @@ async def publish_with_retry(
             if ack.duplicate:
                 LOGGER.warning("Duplicate message detected for subject %s", subject)
             else:
-                LOGGER.info(
+                LOGGER.debug(
                     "Published message to subject %s with payload %s", subject, payload
                 )
                 return
@@ -243,7 +243,7 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
         LOGGER.warning("JetStream context not available. Setting up JetStream again")
         js = await nats_jetstream_setup(profile, event)
 
-    LOGGER.info("Handling event: %s", event)
+    LOGGER.debug("Handling event: %s", event)
     wallet_id: Optional[str] = profile.settings.get("wallet.id")
     try:
         event_payload = process_event_payload(event_payload_to_process)
@@ -269,7 +269,7 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
     }
     try:
         nats_subject = Template(template).substitute(**payload)
-        LOGGER.info("Sending message %s with NATS subject %s", payload, nats_subject)
+        LOGGER.debug("Sending message %s with NATS subject %s", payload, nats_subject)
 
         origin = profile.settings.get("default_label")
         group_id = profile.settings.get("wallet.group_id")
