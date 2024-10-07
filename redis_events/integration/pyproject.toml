@@ -14,7 +14,7 @@ aries-cloudagent = { git = "https://github.com/didx-xyz/aries-cloudagent-python.
 fastapi-slim = "^0.112.0"
 nest-asyncio = "^1.5.5"
 pydantic = "^2.7"
-redis = "^5.0.7"
+redis = "^5.1.1"
 uvicorn = "^0.30.1"
 
 [tool.poetry.dev-dependencies]
