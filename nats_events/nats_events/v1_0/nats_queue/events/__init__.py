@@ -234,7 +234,8 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
         return
 
     if "outbound-message" in template and isinstance(event.payload, OutboundMessage):
-        event_payload_to_process = process_outbound_message_payload(event.payload)
+        return  # Skip OutboundMessage types for now
+        # event_payload_to_process = process_outbound_message_payload(event.payload)
     else:
         event_payload_to_process = event.payload
 
