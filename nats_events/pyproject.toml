@@ -14,7 +14,7 @@ aiohttp = "^3.9.5"
 fastapi-slim = "^0.115.0"
 nest-asyncio = "^1.5.5"
 pydantic = "^2.7"
-uvicorn = "^0.31.0"
+uvicorn = "^0.31.1"
 nats-py = {extras = ["nkeys"], version = "^2.9.0"}
 orjson = "~3.10.7"
 
