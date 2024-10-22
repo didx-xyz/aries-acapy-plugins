@@ -3,12 +3,12 @@ from unittest import IsolatedAsyncioTestCase
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import orjson
+from acapy_agent.connections.models.connection_target import ConnectionTarget
+from acapy_agent.core.event_bus import Event, EventWithMetadata, MockEventBus
+from acapy_agent.core.in_memory import InMemoryProfile
+from acapy_agent.transport.error import TransportError
+from acapy_agent.transport.outbound.message import OutboundMessage
 from aiohttp.test_utils import unused_port
-from aries_cloudagent.connections.models.connection_target import ConnectionTarget
-from aries_cloudagent.core.event_bus import Event, EventWithMetadata, MockEventBus
-from aries_cloudagent.core.in_memory import InMemoryProfile
-from aries_cloudagent.transport.error import TransportError
-from aries_cloudagent.transport.outbound.message import OutboundMessage
 from nats.aio.client import Client as NATS
 from nats.aio.errors import ErrNoServers
 from nats.js import JetStreamContext
