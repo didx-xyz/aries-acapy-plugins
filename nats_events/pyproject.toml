@@ -9,7 +9,7 @@ python = "^3.12"
 
 # Define ACA-Py as an optional/extra dependancy so it can be
 # explicitly installed with the plugin if desired.
-acapy-agent = { git = "https://github.com/didx-xyz/acapy.git", tag = "1.1.1b0" }
+acapy-agent = { git = "https://github.com/didx-xyz/acapy.git", branch = "test-fix-runtime-warning-close-not-awaited" }
 aiohttp = "^3.9.10"
 fastapi-slim = "^0.115.2"
 nest-asyncio = "^1.5.5"
