@@ -158,7 +158,4 @@ def get_config(settings: Mapping[str, Any]) -> NATSConfig:
         config = NATSConfig.default()
 
     LOGGER.debug("Returning config: %s", config.model_dump_json(indent=2))
-    LOGGER.debug(
-        "Returning config(aliases): %s", config.model_dump_json(by_alias=True, indent=2)
-    )
     return config
