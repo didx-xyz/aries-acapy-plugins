@@ -57,6 +57,12 @@ async def nats_jetstream_setup(profile: Profile, event: Event) -> JetStreamConte
     nats = NATS()
     connect_kwargs = {
         "servers": [connection_url],
+        "reconnect_time_wait": 0.5,
+        "max_reconnect_attempts": -1,
+        "error_cb": error_callback,
+        "disconnected_cb": disconnected_callback,
+        "reconnected_cb": reconnected_callback,
+        "closed_cb": closed_callback,
     }
     if NATS_CREDS_FILE:
         connect_kwargs["user_credentials"] = NATS_CREDS_FILE
@@ -73,6 +79,22 @@ async def nats_jetstream_setup(profile: Profile, event: Event) -> JetStreamConte
         LOGGER.error("Caught error in NATS setup: %s", err)
         raise TransportError(f"No NATS instance setup: {err}")
     return js
+
+
+async def error_callback(e):
+    LOGGER.error("NATS error: {}", str(e))
+
+
+async def disconnected_callback():
+    LOGGER.warning("Disconnected from NATS server")
+
+
+async def reconnected_callback():
+    LOGGER.info("Reconnected to NATS server")
+
+
+async def closed_callback():
+    LOGGER.warning("NATS connection closed")
 
 
 async def define_stream(js: JetStreamContext, stream_name: str, subjects: list[str]):
