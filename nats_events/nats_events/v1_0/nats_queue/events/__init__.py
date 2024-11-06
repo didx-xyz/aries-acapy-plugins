@@ -20,6 +20,7 @@ from acapy_agent.transport.outbound.message import OutboundMessage
 from nats.aio.client import Client as NATS
 from nats.aio.errors import ErrConnectionClosed, ErrNoServers, ErrTimeout
 from nats.js import JetStreamContext
+from nats.js.errors import NoStreamResponseError
 
 from ..config import EventConfig, OutboundConfig, get_config
 
@@ -207,7 +208,7 @@ async def publish_with_retry(
                     "Published message to subject %s with payload %s", subject, payload
                 )
                 return
-        except (ErrConnectionClosed, ErrTimeout, ErrNoServers) as err:
+        except (ErrConnectionClosed, ErrTimeout, ErrNoServers, NoStreamResponseError) as err:
             LOGGER.warning(
                 "Attempt %d: Failed to publish message to subject %s: %s",
                 attempt + 1,
