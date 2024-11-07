@@ -52,8 +52,8 @@ didcommv2 = ["didcomm-messaging (>=0.1.1a0,<0.2.0)"]
 [package.source]
 type = "git"
 url = "https://github.com/didx-xyz/acapy.git"
-reference = "test-feat/handle-exceptions"
-resolved_reference = "0dc702fece6822ae260f7863510e82f8e5d225f3"
+reference = "test-feat/handle-exceptions2"
+resolved_reference = "13062f91285c3981bf547aac246a9c4e4c669178"
 
 [[package]]
 name = "aiohappyeyeballs"
@@ -3078,4 +3078,4 @@ aca-py = ["acapy-agent"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "5557067630df1333e51c0c58444ca8dd09b80736ff300e93f71a5bccd7dd5a4e"
+content-hash = "2c6709f8d9774ea5cb440b0d9b2a765330823e46782e90b647bc5d6eff9fac70"
