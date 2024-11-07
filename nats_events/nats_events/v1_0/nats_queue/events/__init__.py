@@ -83,18 +83,22 @@ async def nats_jetstream_setup(profile: Profile, event: Event) -> JetStreamConte
 
 
 async def error_callback(e):
+    """Error callback for NATS."""
     LOGGER.error("NATS error: {}", str(e))
 
 
 async def disconnected_callback():
+    """Disconnected callback for NATS."""
     LOGGER.warning("Disconnected from NATS server")
 
 
 async def reconnected_callback():
+    """Reconnected callback for NATS."""
     LOGGER.info("Reconnected to NATS server")
 
 
 async def closed_callback():
+    """Closed callback for NATS."""
     LOGGER.warning("NATS connection closed")
 
 
