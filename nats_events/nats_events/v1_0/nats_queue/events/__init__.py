@@ -212,7 +212,12 @@ async def publish_with_retry(
                     "Published message to subject %s with payload %s", subject, payload
                 )
                 return
-        except (ErrConnectionClosed, ErrTimeout, ErrNoServers, NoStreamResponseError) as err:
+        except (
+            ErrConnectionClosed,
+            ErrTimeout,
+            ErrNoServers,
+            NoStreamResponseError,
+        ) as err:
             LOGGER.warning(
                 "Attempt %d: Failed to publish message to subject %s: %s",
                 attempt + 1,
