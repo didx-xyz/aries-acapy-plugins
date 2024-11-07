@@ -84,7 +84,7 @@ async def nats_jetstream_setup(profile: Profile, event: Event) -> JetStreamConte
 
 async def error_callback(e):
     """Error callback for NATS."""
-    LOGGER.error("NATS error: {}", str(e))
+    LOGGER.error("NATS error: {}".format(e))
 
 
 async def disconnected_callback():
