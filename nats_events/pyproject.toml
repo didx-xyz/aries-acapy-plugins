@@ -22,7 +22,7 @@ orjson = "~3.10.7"
 aca-py = ["acapy-agent"]
 
 [tool.poetry.dev-dependencies]
-ruff = "^0.7.0"
+ruff = "^0.7.3"
 black = "~24.10.0"
 pytest = "^8.3.2"
 pytest-asyncio = "~0.24.0"
