@@ -2,7 +2,7 @@
 
 [[package]]
 name = "acapy-agent"
-version = "1.1.1b0"
+version = "1.1.1b3"
 description = "(ACA-Py) A Cloud Agent Python is a foundation for building decentralized identity applications and services running in non-mobile environments. "
 optional = false
 python-versions = "^3.12"
@@ -52,8 +52,8 @@ didcommv2 = ["didcomm-messaging (>=0.1.1a0,<0.2.0)"]
 [package.source]
 type = "git"
 url = "https://github.com/didx-xyz/acapy.git"
-reference = "1.1.1b2"
-resolved_reference = "fe62cfd109a5ba6bdbb601f6ece361a3829b202d"
+reference = "1.1.1b3"
+resolved_reference = "30ad5de1a5dc1a8f36cf267123910378769ee21e"
 
 [[package]]
 name = "aiohappyeyeballs"
@@ -1037,13 +1037,13 @@ test = ["hypothesis (>=4.43.0)", "mypy (==1.10.0)", "pytest (>=7.0.0)", "pytest-
 
 [[package]]
 name = "fastapi-slim"
-version = "0.115.4"
+version = "0.115.5"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "fastapi_slim-0.115.4-py3-none-any.whl", hash = "sha256:8947515618c21665590a1673a0bfe4c721db4267999c149d5301c3c0f7b3d9ce"},
-    {file = "fastapi_slim-0.115.4.tar.gz", hash = "sha256:6d37987e4d1f6adefb8c7119c9b804e59c9b3f1a488be5425994d52308e2f958"},
+    {file = "fastapi_slim-0.115.5-py3-none-any.whl", hash = "sha256:02a064de6eb90df9fc9d597e586a5c7e54a0bcebb642e889d27d66b2ecd831a6"},
+    {file = "fastapi_slim-0.115.5.tar.gz", hash = "sha256:e847feadae9f87cabbc178ae665113f73d8c74afc3290d88cc263b701209057f"},
 ]
 
 [package.dependencies]
@@ -3078,4 +3078,4 @@ aca-py = ["acapy-agent"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "497dc20293dd853fcb2cd65a9afa3581d695c3a05f3b66cc885dee0e42ea1164"
+content-hash = "161965d93cb7136d8db89aeeaba4bcdf21cbf84929651f2772152aff4874e24f"
