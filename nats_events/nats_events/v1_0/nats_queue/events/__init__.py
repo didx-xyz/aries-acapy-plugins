@@ -270,7 +270,6 @@ async def handle_event(profile: Profile, event: EventWithMetadata):
     }
     try:
         nats_subject = Template(template).substitute(**payload)
-        LOGGER.debug("Sending message %s with NATS subject %s", payload, nats_subject)
 
         origin = profile.settings.get("default_label")
         group_id = profile.settings.get("wallet.group_id")

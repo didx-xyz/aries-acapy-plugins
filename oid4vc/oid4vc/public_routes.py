@@ -434,6 +434,7 @@ async def get_request(request: web.Request):
                 session=session, request_id=request_id
             )
             pres.state = OID4VPPresentation.REQUEST_RETRIEVED
+            pres.nonce = token_urlsafe(NONCE_BYTES)
             await pres.save(session=session, reason="Retrieved presentation request")
 
             pres_def = await OID4VPPresDef.retrieve_by_id(session, record.pres_def_id)
@@ -456,7 +457,7 @@ async def get_request(request: web.Request):
         "client_id": config.endpoint,
         "response_uri": f"{config.endpoint}/oid4vp/response/{pres.presentation_id}",
         "state": pres.presentation_id,
-        "nonce": token_urlsafe(),
+        "nonce": pres.nonce,
         "id_token_signing_alg_values_supported": ["ES256", "EdDSA"],
         "request_object_signing_alg_values_supported": ["ES256", "EdDSA"],
         "response_types_supported": ["id_token", "vp_token"],
@@ -520,6 +521,7 @@ async def verify_presentation(
     submission: PresentationSubmission,
     vp_token: str,
     pres_def_id: str,
+    presentation: OID4VPPresentation,
 ):
     """Verify a received presentation."""
 
@@ -538,7 +540,11 @@ async def verify_presentation(
     verifier = processors.pres_verifier_for_format(submission.descriptor_maps[0].fmt)
     LOGGER.debug("VERIFIER: %s", verifier)
 
-    vp_result = await verifier.verify_presentation(profile=profile, presentation=vp_token)
+    vp_result = await verifier.verify_presentation(
+        profile=profile,
+        presentation=vp_token,
+        presentation_record=presentation,
+    )
 
     async with profile.session() as session:
         pres_def_entry = await OID4VPPresDef.retrieve_by_id(
@@ -584,6 +590,7 @@ async def post_response(request: web.Request):
             submission=presentation_submission,
             vp_token=vp_token,
             pres_def_id=record.pres_def_id,
+            presentation=record,
         )
 
     except StorageNotFoundError as err:

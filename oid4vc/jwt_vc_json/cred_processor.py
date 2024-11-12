@@ -18,6 +18,7 @@ from oid4vc.cred_processor import (
 )
 from oid4vc.jwt import jwt_sign, jwt_verify
 from oid4vc.models.exchange import OID4VCIExchangeRecord
+from oid4vc.models.presentation import OID4VPPresentation
 from oid4vc.models.supported_cred import SupportedCredential
 from oid4vc.pop_result import PopResult
 from oid4vc.public_routes import types_are_subset
@@ -97,12 +98,19 @@ class JwtVcJsonCredProcessor(Issuer, CredVerifier, PresVerifier):
             payload=res.payload,
         )
 
-    async def verify_credential(self, profile: Profile, credential: Any) -> VerifyResult:
+    async def verify_credential(
+        self,
+        profile: Profile,
+        credential: Any,
+    ) -> VerifyResult:
         """Verify a credential in JWT VC format."""
         return await self.verify(profile, credential)
 
     async def verify_presentation(
-        self, profile: Profile, presentation: Any
+        self,
+        profile: Profile,
+        presentation: Any,
+        presentation_record: OID4VPPresentation,
     ) -> VerifyResult:
         """Verify a presentation in JWT VP format."""
         return await self.verify(profile, presentation)
