@@ -16,7 +16,7 @@ nest-asyncio = "^1.5.5"
 pydantic = "^2.7"
 uvicorn = "^0.32.0"
 nats-py = {extras = ["nkeys"], version = "^2.9.0"}
-orjson = "~3.10.7"
+orjson = "~3.10.12"
 
 [tool.poetry.extras]
 aca-py = ["acapy-agent"]
